@@ -1,5 +1,5 @@
 <template>
-    <md-bottom-bar md-shift @change="change">
+    <md-bottom-bar md-shift @change="pageJump">
         <md-bottom-bar-item md-icon="message" :md-active="path==='/talk'">Massage</md-bottom-bar-item>
         <md-bottom-bar-item md-icon="contacts" :md-active="path==='/contact'">Contacts</md-bottom-bar-item>
         <md-bottom-bar-item md-icon="explore" :md-active="path==='/explore'">Explore</md-bottom-bar-item>
@@ -11,7 +11,7 @@
 export default {
   name: 'bottomBar',
   methods: {
-    change(index) {
+    pageJump(index) {
       let path = '/';
       switch (index) {
         case 0:
