@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'talkList',
+  name: 'chatList',
 };
 </script>
 

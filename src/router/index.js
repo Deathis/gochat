@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import TalkList from '@/components/TalkList';
+import ChatList from '@/components/ChatList';
 import ContactList from '@/components/ContactList';
 import Home from '@/components/Home';
 
@@ -14,9 +14,9 @@ export default new Router({
       component: Home,
       children: [
         {
-          path: 'talk',
-          name: 'talk',
-          component: TalkList,
+          path: 'chat',
+          name: 'chat',
+          component: ChatList,
         },
         {
           path: 'contact',
