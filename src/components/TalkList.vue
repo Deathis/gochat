@@ -23,11 +23,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import '~compass-mixins/compass/css3';
-
+<style lang="scss" scoped> 
 .title {
-    @include display-flex;
-    @include justify-content(space-between);
+    display: flex;
+    justify-content: space-between;
 }
 </style>

@@ -17,10 +17,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~compass-mixins/compass/css3';
-
-span {
-    @include flex(1);
-}
+ span {
+     flex: 1;
+ }
 </style>
 
