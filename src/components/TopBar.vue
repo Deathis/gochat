@@ -1,6 +1,6 @@
 <template>
     <md-toolbar>
-        <span>gochat</span>
+        <span class="md-title">gochat</span>
         <md-button class="md-icon-button">
             <md-icon>search</md-icon>
         </md-button>
@@ -17,8 +17,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- span {
-     flex: 1;
- }
+span {
+    flex: 1;
+}
 </style>
 
