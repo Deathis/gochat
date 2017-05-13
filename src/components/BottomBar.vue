@@ -1,9 +1,9 @@
 <template>
     <md-bottom-bar md-shift @change="pageJump">
-        <md-bottom-bar-item md-icon="message" :md-active="routeName==='/talk'">Massage</md-bottom-bar-item>
-        <md-bottom-bar-item md-icon="contacts" :md-active="routeName==='/contact'">Contacts</md-bottom-bar-item>
-        <md-bottom-bar-item md-icon="explore" :md-active="routeName==='/explore'">Explore</md-bottom-bar-item>
-        <md-bottom-bar-item md-icon="person" :md-active="routeName==='/me'">Me</md-bottom-bar-item>
+        <md-bottom-bar-item md-icon="message" :md-active="routeName==='talk'">Massage</md-bottom-bar-item>
+        <md-bottom-bar-item md-icon="contacts" :md-active="routeName==='contact'">Contacts</md-bottom-bar-item>
+        <md-bottom-bar-item md-icon="explore" :md-active="routeName==='explore'">Explore</md-bottom-bar-item>
+        <md-bottom-bar-item md-icon="person" :md-active="routeName==='me'">Me</md-bottom-bar-item>
     </md-bottom-bar>
 </template>
 
@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     routeName() {
-      return this.$route.routeName;
+      return this.$route.name;
     },
   },
 };
