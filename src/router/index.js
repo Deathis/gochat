@@ -5,6 +5,7 @@ import ContactList from '@/components/ContactList';
 import Explore from '@/components/Explore';
 import Me from '@/components/Me';
 import Home from '@/components/Home';
+import Chat from '@/components/Chat';
 
 Vue.use(Router);
 
@@ -36,6 +37,11 @@ export default new Router({
           component: Me,
         },
       ],
+    },
+    {
+      path: '/chatting',
+      name: 'chatting',
+      component: Chat,
     },
   ],
 });

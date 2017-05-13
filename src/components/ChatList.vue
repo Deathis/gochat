@@ -1,6 +1,6 @@
 <template>
     <md-list class="md-double-line">
-        <md-list-item>
+        <md-list-item @click.native="showChatting">
             <md-ink-ripple />
             <md-avatar class="md-large">
                 <img src="https://placeimg.com/40/40/people/1" alt="People">
@@ -20,10 +20,15 @@
 <script>
 export default {
   name: 'chatList',
+  methods: {
+    showChatting() {
+      this.$router.push({ name: 'chatting' });
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped> 
+<style lang="scss" scoped>
 .title {
     display: flex;
     justify-content: space-between;
