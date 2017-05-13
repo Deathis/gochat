@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import TalkPanel from '@/components/TalkPanel';
-import ContactPanel from '@/components/ContactPanel';
+import TalkList from '@/components/TalkList';
+import ContactList from '@/components/ContactList';
 
 Vue.use(Router);
 
@@ -10,12 +10,12 @@ export default new Router({
     {
       path: '/talk',
       name: 'talk',
-      component: TalkPanel,
+      component: TalkList,
     },
     {
       path: '/contact',
       name: 'contact',
-      component: ContactPanel,
+      component: ContactList,
     },
   ],
 });
