@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import ChatList from '@/components/ChatList';
 import ContactList from '@/components/ContactList';
 import Explore from '@/components/Explore';
+import Me from '@/components/Me';
 import Home from '@/components/Home';
 
 Vue.use(Router);
@@ -28,6 +29,11 @@ export default new Router({
           path: 'explore',
           name: 'explore',
           component: Explore,
+        },
+        {
+          path: 'me',
+          name: 'me',
+          component: Me,
         },
       ],
     },
