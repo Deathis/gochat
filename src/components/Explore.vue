@@ -13,7 +13,7 @@
                 <md-icon>theaters</md-icon>
             </md-button>
             <span>Theaters</span>
-            <md-divider></md-divider>
+            <md-divider class="md-inset"></md-divider>
         </md-list-item>
         <md-list-item>
             <md-ink-ripple></md-ink-ripple>
@@ -28,5 +28,17 @@
 <style lang="scss" scoped>
 span {
     flex: 1;
+}
+
+ul.md-list {
+    background-color: #eeeeee;
+    padding-top: 0;
+}
+
+.md-list-item {
+    background-color: #fff;
+    &:nth-child(1) {
+        margin-bottom: 8px;
+    }
 }
 </style>
