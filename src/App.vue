@@ -1,24 +1,18 @@
 <template>
   <div id="app">
-    <TopBar></TopBar>
-    <div id="container">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
-    </div>
-    <BottomBar></BottomBar>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import TopBar from '@/components/TopBar';
-import BottomBar from '@/components/BottomBar';
+import Home from '@/components/Home';
 
 export default {
   name: 'app',
   components: {
-    TopBar,
-    BottomBar,
+    Home,
   },
 };
 </script>
@@ -31,11 +25,5 @@ body {
 
 #app {
   height: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-}
-
-#container { 
-    flex: 1; 
 }
 </style>

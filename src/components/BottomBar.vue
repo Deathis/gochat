@@ -1,9 +1,9 @@
 <template>
     <md-bottom-bar md-shift @change="pageJump">
-        <md-bottom-bar-item md-icon="message" :md-active="path==='/talk'">Massage</md-bottom-bar-item>
-        <md-bottom-bar-item md-icon="contacts" :md-active="path==='/contact'">Contacts</md-bottom-bar-item>
-        <md-bottom-bar-item md-icon="explore" :md-active="path==='/explore'">Explore</md-bottom-bar-item>
-        <md-bottom-bar-item md-icon="person" :md-active="path==='/me'">Me</md-bottom-bar-item>
+        <md-bottom-bar-item md-icon="message" :md-active="routeName==='/talk'">Massage</md-bottom-bar-item>
+        <md-bottom-bar-item md-icon="contacts" :md-active="routeName==='/contact'">Contacts</md-bottom-bar-item>
+        <md-bottom-bar-item md-icon="explore" :md-active="routeName==='/explore'">Explore</md-bottom-bar-item>
+        <md-bottom-bar-item md-icon="person" :md-active="routeName==='/me'">Me</md-bottom-bar-item>
     </md-bottom-bar>
 </template>
 
@@ -12,29 +12,29 @@ export default {
   name: 'bottomBar',
   methods: {
     pageJump(index) {
-      let path = '/';
+      let routeName = 'home';
       switch (index) {
         case 0:
-          path = '/talk';
+          routeName = 'talk';
           break;
         case 1:
-          path = '/contact';
+          routeName = 'contact';
           break;
         case 2:
-          path = '/explore';
+          routeName = 'explore';
           break;
         case 3:
-          path = '/me';
+          routeName = 'me';
           break;
         default:
           break;
       }
-      this.$router.push(path);
+      this.$router.push({ name: routeName });
     },
   },
   computed: {
-    path() {
-      return this.$route.path;
+    routeName() {
+      return this.$route.routeName;
     },
   },
 };
