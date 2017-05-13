@@ -55,14 +55,13 @@
 
 .md-list {
     margin-bottom: 10px;
-    &:last-child {
-        padding-bottom: 0;
+    padding: {
+        top: 0;
+        bottom: 0;
     }
 }
 
 span {
     flex: 1;
 }
-
-;
 </style>
