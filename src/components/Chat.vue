@@ -10,6 +10,8 @@
             </md-button>
         </md-toolbar>
         <div id="chat-box">
+            <ChatBubble right>Hello</ChatBubble>
+            <ChatBubble>Wow</ChatBubble>
         </div>
         <div id="inputContainer">
             <md-button class="md-icon-button">
@@ -29,12 +31,17 @@
 </template>
 
 <script>
+import ChatBubble from '@/components/ChatBubble';
+
 export default {
   name: 'chat',
   data() {
     return {
       inputContent: '',
     };
+  },
+  components: {
+    ChatBubble,
   },
   methods: {
     goback() {
@@ -59,6 +66,7 @@ h2 {
     border: {
         bottom: 1px solid #eeeeee;
     }
+    background-color: #eeeeee;
     overflow: auto;
     padding: 0 5px;
     &::-webkit-scrollbar {
