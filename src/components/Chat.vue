@@ -4,14 +4,15 @@
             <md-button class="md-icon-button" @click.native="goback">
                 <md-icon>arrow_back</md-icon>
             </md-button>
-            <h2 class="md-title">Julia</h2>
+            <h2 class="md-title">{{currentContact.name}}</h2>
             <md-button class="md-icon-button">
                 <md-icon>person</md-icon>
             </md-button>
         </md-toolbar>
         <div id="chat-box">
-            <ChatBubble right>Hello</ChatBubble>
-            <ChatBubble>Wow</ChatBubble>
+            <ChatBubble v-for="(record,index) in currentChatRecords" key="record.id" :avatar="record.from === currentUser.account?currentUser.avatar:currentContact.avatar" :alignRight="record.from === currentUser.account">
+                {{record.content}}
+            </ChatBubble>
         </div>
         <div id="inputContainer">
             <md-button class="md-icon-button">
@@ -32,6 +33,7 @@
 
 <script>
 import ChatBubble from '@/components/ChatBubble';
+import { mapState } from 'vuex';
 
 export default {
   name: 'chat',
@@ -48,6 +50,17 @@ export default {
       this.$router.go(-1);
     },
   },
+  computed: mapState({
+    currentContact: 'currentContact',
+    currentUser: 'currentUser',
+    currentChatRecords() {
+      return this.$store.state.chatRecords.filter(record =>
+      (record.from === this.currentContact.account &&
+      record.to === this.currentUser.account) ||
+          (record.to === this.currentContact.account &&
+        record.from === this.currentUser.account));
+    },
+  }),
 };
 </script>
 

@@ -1,15 +1,15 @@
 <template>
     <div :class="bubbleClassObj">
-        <md-avatar v-if="!right">
-            <img src="https://placeimg.com/40/40/people/1" alt="Avatar">
+        <md-avatar v-if="!alignRight">
+            <img :src="avatar" alt="Avatar">
         </md-avatar>
         <div :class="replyClassObj">
             <div class="content">
                 <slot></slot>
             </div>
         </div>
-        <md-avatar v-if="right">
-            <img src="https://placeimg.com/40/40/people/1" alt="Avatar">
+        <md-avatar v-if="alignRight">
+            <img :src="avatar" alt="Avatar">
         </md-avatar>
     </div>
 </template>
@@ -18,23 +18,27 @@
 export default {
   name: 'chatBubble',
   props: {
-    right: {
+    alignRight: {
       type: Boolean,
       default: false,
+    },
+    avatar: {
+      type: String,
+      default: '',
     },
   },
   computed: {
     bubbleClassObj() {
       return {
         bubble: true,
-        'bubble-right': this.right,
+        'bubble-right': this.alignRight,
       };
     },
     replyClassObj() {
       return {
         reply: true,
-        'reply-left': !this.right,
-        'reply-right': this.right,
+        'reply-left': !this.alignRight,
+        'reply-right': this.alignRight,
       };
     },
   },
