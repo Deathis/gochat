@@ -4,11 +4,11 @@
             <md-list-item>
                 <md-ink-ripple />
                 <md-avatar class="md-large">
-                    <img src="https://placeimg.com/40/40/people/1" alt="Avatar">
+                    <img :src="currentUser.avatar" alt="Avatar">
                 </md-avatar>
                 <div class="md-list-text-container">
-                    <div class="md-title">Ali Connors</div>
-                    <div>ID:206312</div>
+                    <div class="md-title">{{currentUser.name}}</div>
+                    <div>Account:{{currentUser.account}}</div>
                 </div>
             </md-list-item>
         </md-list>
@@ -41,6 +41,17 @@
         </md-list>
     </div>
 </template>
+
+<script>
+import { mapState } from 'vuex';
+
+export default {
+  name: 'me',
+  computed: mapState({
+    currentUser: 'currentUser',
+  }),
+};
+</script>
 
 
 <style lang="scss" scoped>

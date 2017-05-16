@@ -10,7 +10,7 @@
             </md-button>
         </md-toolbar>
         <div id="chat-box">
-            <ChatBubble v-for="(record,index) in currentChatRecords" key="record.id" :avatar="record.from === currentUser.account?currentUser.avatar:currentContact.avatar" :alignRight="record.from === currentUser.account">
+            <ChatBubble v-for="record in currentChatRecords" :key="record.id" :avatar="record.from === currentUser.account?currentUser.avatar:currentContact.avatar" :alignRight="record.from === currentUser.account">
                 {{record.content}}
             </ChatBubble>
         </div>
@@ -24,7 +24,7 @@
             <md-button class="md-icon-button">
                 <md-icon class="md-primary">insert_emoticon</md-icon>
             </md-button>
-            <md-button class="md-icon-button" :disabled="inputContent.length===0">
+            <md-button class="md-icon-button" :disabled="inputContent.length===0" @click.native="addRecord">
                 <md-icon :class="{'md-primary':inputContent.length>0}">send</md-icon>
             </md-button>
         </div>
@@ -49,6 +49,17 @@ export default {
     goback() {
       this.$router.go(-1);
     },
+    addRecord() {
+      const record = {
+        id: this.recordIndex,
+        from: this.currentUser.account,
+        to: this.currentContact.account,
+        content: this.inputContent,
+        Timestamp: new Date().getTime(),
+      };
+      this.$store.dispatch('addRecord', record);
+      this.inputContent = '';
+    },
   },
   computed: mapState({
     currentContact: 'currentContact',
@@ -59,6 +70,9 @@ export default {
       record.to === this.currentUser.account) ||
           (record.to === this.currentContact.account &&
         record.from === this.currentUser.account));
+    },
+    recordIndex() {
+      return this.$store.state.chatRecords.length + 1;
     },
   }),
 };
