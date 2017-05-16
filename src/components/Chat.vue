@@ -65,11 +65,13 @@ export default {
     currentContact: 'currentContact',
     currentUser: 'currentUser',
     currentChatRecords() {
-      return this.$store.state.chatRecords.filter(record =>
+      const records = this.$store.state.chatRecords.filter(record =>
       (record.from === this.currentContact.account &&
       record.to === this.currentUser.account) ||
           (record.to === this.currentContact.account &&
         record.from === this.currentUser.account));
+      records.sort((a, b) => a.Timestamp - b.Timestamp);
+      return records;
     },
     recordIndex() {
       return this.$store.state.chatRecords.length + 1;
