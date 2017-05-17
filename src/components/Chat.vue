@@ -24,7 +24,7 @@
             <md-button class="md-icon-button">
                 <md-icon class="md-primary">insert_emoticon</md-icon>
             </md-button>
-            <md-button class="md-icon-button" :disabled="inputContent.length===0" @click.native="addRecord">
+            <md-button class="md-icon-button" :disabled="inputContent.length===0" @click.native="sendChatMessage">
                 <md-icon :class="{'md-primary':inputContent.length>0}">send</md-icon>
             </md-button>
         </div>
@@ -49,7 +49,7 @@ export default {
     goback() {
       this.$router.go(-1);
     },
-    addRecord() {
+    sendChatMessage() {
       const record = {
         id: this.recordIndex,
         from: this.currentUser.account,
@@ -57,7 +57,7 @@ export default {
         content: this.inputContent,
         Timestamp: new Date().getTime(),
       };
-      this.$store.dispatch('addRecord', record);
+      this.$store.dispatch('sendChatMessage', record);
       this.inputContent = '';
       this.$nextTick(() => {
         this.$refs.chatBox.scrollTop = this.$refs.chatBox.scrollHeight;

@@ -7,4 +7,7 @@ export default{
   addRecord({ commit }, record) {
     commit(types.ADD_CHAT_RECORD, record);
   },
+  sendChatMessage({ commit }, record) {
+    commit(types.ADD_CHAT_RECORD, record);
+  },
 };
