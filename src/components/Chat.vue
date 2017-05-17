@@ -9,10 +9,10 @@
                 <md-icon>person</md-icon>
             </md-button>
         </md-toolbar>
-        <div id="chat-box">
+        <div id="chat-box" ref="chatBox">
             <ChatBubble v-for="record in currentChatRecords" :key="record.id" :avatar="record.from === currentUser.account?currentUser.avatar:currentContact.avatar" :alignRight="record.from === currentUser.account">
                 {{record.content}}
-            </ChatBubble>
+            </ChatBubble> 
         </div>
         <div id="inputContainer">
             <md-button class="md-icon-button">
@@ -59,6 +59,9 @@ export default {
       };
       this.$store.dispatch('addRecord', record);
       this.inputContent = '';
+      this.$nextTick(() => {
+        this.$refs.chatBox.scrollTop = this.$refs.chatBox.scrollHeight;
+      });
     },
   },
   computed: mapState({

@@ -50,6 +50,7 @@ export default {
 .bubble {
     display: flex;
     margin-top: 10px;
+    flex-shrink: 0;
 
     &#{'-right'} {
         justify-content: flex-end;
