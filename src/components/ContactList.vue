@@ -1,6 +1,6 @@
 <template>
     <md-list>
-        <md-list-item v-for="contact in contactList" :key="contact.account">
+        <md-list-item v-for="contact in contactList" :key="contact.account" @click.native="gotoProfile(contact)">
             <md-ink-ripple />
             <md-avatar class="md-large">
                 <img :src="contact.avatar" alt="Avatar">
@@ -14,12 +14,21 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'contactList',
   computed: mapState({
     contactList: 'contactList',
   }),
+  methods: {
+    gotoProfile(profile) {
+      this.updateCurrentProfile(profile);
+      this.$router.push({ name: 'profile' });
+    },
+    ...mapActions([
+      'updateCurrentProfile',
+    ]),
+  },
 };
 </script>

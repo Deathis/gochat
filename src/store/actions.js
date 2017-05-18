@@ -10,4 +10,7 @@ export default{
   sendChatMessage({ commit }, record) {
     commit(types.ADD_CHAT_RECORD, record);
   },
+  updateCurrentProfile({ commit }, profile) {
+    commit(types.UPDATE_CURRENT_PROFILE, profile);
+  },
 };

@@ -7,4 +7,7 @@ export default {
   [types.ADD_CHAT_RECORD](state, record) {
     state.chatRecords.push(record);
   },
+  [types.UPDATE_CURRENT_PROFILE](state, profile) {
+    state.currentProfile = profile;
+  },
 };
