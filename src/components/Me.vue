@@ -16,7 +16,7 @@
             <md-list-item>
                 <md-ink-ripple />
                 <md-button class="md-icon-button">
-                    <md-icon>photo</md-icon>
+                    <md-icon class="md-primary">photo</md-icon>
                 </md-button>
                 <span>My Posts</span>
                 <md-divider></md-divider>
@@ -24,7 +24,7 @@
             <md-list-item>
                 <md-ink-ripple />
                 <md-button class="md-icon-button">
-                    <md-icon>bookmark</md-icon>
+                    <md-icon class="md-primary">bookmark</md-icon>
                 </md-button>
                 <span>Favorites</span>
             </md-list-item>
@@ -33,7 +33,7 @@
             <md-list-item>
                 <md-ink-ripple />
                 <md-button class="md-icon-button">
-                    <md-icon>settings</md-icon>
+                    <md-icon class="md-primary">settings</md-icon>
                 </md-button>
                 <span>Settings</span>
                 <md-divider></md-divider>

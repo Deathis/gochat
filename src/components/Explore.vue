@@ -3,14 +3,14 @@
         <md-list-item>
             <md-ink-ripple></md-ink-ripple>
             <md-button class="md-icon-button">
-                <md-icon>store</md-icon>
+                <md-icon class="md-primary">store</md-icon>
             </md-button>
             <span>Store</span>
         </md-list-item>
         <md-list-item>
             <md-ink-ripple></md-ink-ripple>
             <md-button class="md-icon-button">
-                <md-icon>theaters</md-icon>
+                <md-icon class="md-primary">theaters</md-icon>
             </md-button>
             <span>Theaters</span>
             <md-divider class="md-inset"></md-divider>
@@ -18,7 +18,7 @@
         <md-list-item>
             <md-ink-ripple></md-ink-ripple>
             <md-button class="md-icon-button">
-                <md-icon>translate</md-icon>
+                <md-icon class="md-primary">translate</md-icon>
             </md-button>
             <span>Translate</span>
         </md-list-item>
