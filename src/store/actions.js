@@ -7,8 +7,11 @@ export default{
   addRecord({ commit }, record) {
     commit(types.ADD_CHAT_RECORD, record);
   },
-  sendChatMessage({ commit }, record) {
-    commit(types.ADD_CHAT_RECORD, record);
+  sendChatMessage(context, record) {
+    context.commit(types.ADD_CHAT_RECORD, record);
+    if (context.state.chatList.indexOf(context.state.currentContact) < 0) {
+      context.commit(types.UPDATE_CHAT_LIST, context.state.currentContact);
+    }
   },
   updateCurrentProfile({ commit }, profile) {
     commit(types.UPDATE_CURRENT_PROFILE, profile);

@@ -31,8 +31,6 @@ export default new Vuex.Store({
       { account: 4, name: 'Jack', gender: 0, avatar: 'https://placeimg.com/40/40/people/4' },
     ],
     chatList: [
-      { account: 2, name: 'Randy', gender: 0, avatar: 'https://placeimg.com/40/40/people/2' },
-      { account: 4, name: 'Jack', gender: 0, avatar: 'https://placeimg.com/40/40/people/4' },
     ],
     currentProfile: { account: 2, name: 'Randy', gender: 0, avatar: 'https://placeimg.com/40/40/people/2' },
   },
