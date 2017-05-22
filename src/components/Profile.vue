@@ -29,10 +29,10 @@
                     <md-ink-ripple />
                     <div>Set Remark and Tag</div>
                 </md-list-item>
-            </md-list>
+            </md-list>  
             <md-list class="buttonContainer">
-                <md-button @click.native="gotoChatting">Message</md-button>
-            </md-list>
+                <md-button @click.native="gotoChatting" class="md-raised md-primary">Message</md-button>
+            </md-list> 
         </md-layout>
     </div>
 </template>
@@ -99,8 +99,7 @@ export default {
         }
         ;
         .md-button {
-            text-transform: none;
-            background-color: #4caf50;
+            text-transform: none; 
             margin: 0;
         }
     }
