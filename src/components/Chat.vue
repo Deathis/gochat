@@ -10,9 +10,9 @@
             </md-button>
         </md-toolbar>
         <div id="chat-box" ref="chatBox">
-            <ChatBubble v-for="record in currentChatRecords" :key="record.id" :avatar="record.from === currentUser.account?currentUser.avatar:currentContact.avatar" :alignRight="record.from === currentUser.account">
-                {{record.content}}
-            </ChatBubble> 
+            <Bubble class="md-primary" v-for="record in currentChatRecords" :key="record.id" :avatar="record.from === currentUser.account?currentUser.avatar:currentContact.avatar" :alignRight="record.from === currentUser.account">
+                 {{record.content}}
+            </Bubble>
         </div>
         <div id="inputContainer">
             <md-button class="md-icon-button">
@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import ChatBubble from '@/components/ChatBubble';
 import { mapState } from 'vuex';
 
 export default {
@@ -41,9 +40,6 @@ export default {
     return {
       inputContent: '',
     };
-  },
-  components: {
-    ChatBubble,
   },
   methods: {
     goback() {

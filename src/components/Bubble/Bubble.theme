@@ -1,0 +1,36 @@
+.THEME_NAME {
+  &.bubble {
+    &.md-primary { 
+        .reply-right {
+            &::after {
+                 border-color: #{'PRIMARY-COLOR'} #{'PRIMARY-COLOR'} transparent transparent;
+             }
+            .content{ 
+                    background-color: #{'PRIMARY-COLOR'};
+            }
+        }
+    }
+
+    &.md-accent {
+        .reply-right {
+             &::after {
+                 border-color: #{'ACCENT-COLOR'} #{'ACCENT-COLOR'} transparent transparent;
+             }
+            .content{ 
+                    background-color: #{'ACCENT-COLOR'};
+            }
+        }
+    }
+
+    &.md-warn {
+        .reply-right {
+            &::after {
+                 border-color: #{'WARN-COLOR'} #{'WARN-COLOR'} transparent transparent;
+             }
+            .content{  
+                    background-color: #{'WARN-COLOR'};
+            }
+        }
+    }
+  }
+}
