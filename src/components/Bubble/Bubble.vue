@@ -65,6 +65,7 @@ export default {
 
     .content {
         max-width: 100%;
+        min-width: 40px;
         background-color: #ffffff;
         border-radius: 10px;
         word-wrap: break-word;
