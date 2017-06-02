@@ -23,7 +23,7 @@ export default new Vuex.Store({
         from: 2,
         to: 1,
         content: 'Hi Julia!',
-        Timestamp: 1235656765745,
+        Timestamp: 1235656765746,
         isNewMsg: true,
       },
     ],

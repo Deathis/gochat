@@ -39,7 +39,7 @@ export default {
     getLastChatRecord(account) {
       return this.$store.state.chatRecords.filter(record =>
                                            record.from === account || record.to === account)
-                                    .sort((a, b) => a.Timestamp - b.Timestamp)[0];
+                                    .sort((a, b) => b.Timestamp - a.Timestamp)[0];
     },
   },
   computed: mapState({
