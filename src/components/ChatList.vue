@@ -34,7 +34,7 @@ export default {
     getNewMsgCount(account) {
       return this.$store.state.chatRecords.filter(record =>
                                            record.from === account &&
-                                            record.isNewMsg).length;
+                                            !record.read).length;
     },
     getLastChatRecord(account) {
       return this.$store.state.chatRecords.filter(record =>

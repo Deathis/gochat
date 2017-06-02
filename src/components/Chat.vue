@@ -52,7 +52,7 @@ export default {
         to: this.currentContact.account,
         content: this.inputContent,
         Timestamp: new Date().getTime(),
-        isNewMsg: false,
+        read: true,
       };
       this.$store.dispatch('sendChatMessage', record);
       this.inputContent = '';

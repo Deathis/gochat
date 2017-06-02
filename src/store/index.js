@@ -16,7 +16,7 @@ export default new Vuex.Store({
         to: 2,
         content: 'Hello Randy!',
         Timestamp: 1235656765745,
-        isNewMsg: false,
+        read: true,
       },
       {
         id: 1,
@@ -24,7 +24,7 @@ export default new Vuex.Store({
         to: 1,
         content: 'Hi Julia!',
         Timestamp: 1235656765746,
-        isNewMsg: true,
+        read: false,
       },
     ],
     contactList: [
