@@ -8,9 +8,9 @@
             <div class="md-list-text-container">
                 <div class="title">
                     <span class="md-title">{{chat.name}}</span>
-                    <span>Fri</span>
+                    <span>{{new Date(getLastChatRecord(chat.account).Timestamp).toLocaleString()}}</span>
                 </div>
-                <span>Tody is a good day.</span>
+                <span><template v-if="getNewMsgCount(chat.account) > 0">[{{getNewMsgCount(chat.account)}} message(s)]</template> {{getLastChatRecord(chat.account).content}}</span>
             </div>
             <md-divider></md-divider>
         </md-list-item>
@@ -30,6 +30,16 @@ export default {
 
     updateCurrentContact(contact) {
       this.$store.dispatch('updateCurrentContact', contact);
+    },
+    getNewMsgCount(account) {
+      return this.$store.state.chatRecords.filter(record =>
+                                           record.from === account &&
+                                            record.isNewMsg).length;
+    },
+    getLastChatRecord(account) {
+      return this.$store.state.chatRecords.filter(record =>
+                                           record.from === account || record.to === account)
+                                    .sort((a, b) => a.Timestamp - b.Timestamp)[0];
     },
   },
   computed: mapState({
