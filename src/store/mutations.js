@@ -11,6 +11,12 @@ export default {
     state.currentProfile = profile;
   },
   [types.UPDATE_CHAT_LIST](state, chat) {
-    state.chatList.push(chat);
+    const index = state.chatList.indexOf(chat);
+    if (index < 0) {
+      state.chatList.unshift(chat);
+    } else {
+      state.chatList.splice(index, 1);
+      state.chatList.unshift(chat);
+    }
   },
 };

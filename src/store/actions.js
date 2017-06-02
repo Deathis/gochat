@@ -9,7 +9,7 @@ export default{
   },
   sendChatMessage(context, record) {
     context.commit(types.ADD_CHAT_RECORD, record);
-    if (context.state.chatList.indexOf(context.state.currentContact) < 0) {
+    if (context.state.chatList.indexOf(context.state.currentContact) !== 0) {
       context.commit(types.UPDATE_CHAT_LIST, context.state.currentContact);
     }
   },
