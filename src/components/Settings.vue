@@ -34,6 +34,11 @@
 <script>
 export default {
   name: 'settings',
+  methods: {
+    goback() {
+      this.$router.go(-1);
+    },
+  },
 };
 </script>
 

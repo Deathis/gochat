@@ -30,7 +30,7 @@
             </md-list-item>
         </md-list>
         <md-list>
-            <md-list-item>
+            <md-list-item @click.native="gotoSettings">
                 <md-ink-ripple />
                 <md-button class="md-icon-button">
                     <md-icon class="md-primary">settings</md-icon>
@@ -53,6 +53,9 @@ export default {
   methods: {
     gotoMyProfile() {
       this.$router.push({ name: 'myProfile' });
+    },
+    gotoSettings() {
+      this.$router.push({ name: 'settings' });
     },
   },
 };
