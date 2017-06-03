@@ -1,6 +1,6 @@
 <template>
     <md-list class="md-double-line">
-        <md-list-item v-for="chat in chatList" :key="chat.account" @click.native="showChatting(chat)">
+        <md-list-item :class="{'small-dots':getNewMsgCount(chat.account) > 0}" v-for="chat in chatList" :key="chat.account" @click.native="showChatting(chat)">
             <md-ink-ripple />
             <md-avatar class="md-large">
                 <img :src="chat.avatar" alt="Avatar">
@@ -10,7 +10,8 @@
                     <span class="md-title">{{chat.name}}</span>
                     <span>{{new Date(getLastChatRecord(chat.account).Timestamp).toLocaleString()}}</span>
                 </div>
-                <span><template v-if="getNewMsgCount(chat.account) > 0">[{{getNewMsgCount(chat.account)}} message(s)]</template> {{getLastChatRecord(chat.account).content}}</span>
+                <span>
+                    <template v-if="getNewMsgCount(chat.account) > 0">[{{getNewMsgCount(chat.account)}} message(s)]</template> {{getLastChatRecord(chat.account).content}}</span>
             </div>
             <md-divider></md-divider>
         </md-list-item>
@@ -34,13 +35,13 @@ export default {
     },
     getNewMsgCount(account) {
       return this.$store.state.chatRecords.filter(record =>
-                                           record.from === account &&
-                                            !record.read).length;
+                record.from === account &&
+                !record.read).length;
     },
     getLastChatRecord(account) {
       return this.$store.state.chatRecords.filter(record =>
-                                           record.from === account || record.to === account)
-                                    .sort((a, b) => b.Timestamp - a.Timestamp)[0];
+                record.from === account || record.to === account)
+                .sort((a, b) => b.Timestamp - a.Timestamp)[0];
     },
     ...mapActions([
       'updateChatRecord',
@@ -56,5 +57,25 @@ export default {
 .title {
     display: flex;
     justify-content: space-between;
+}
+
+.md-list-item {
+    .md-avatar {
+        border-radius: 0;
+    }
+}
+
+.small-dots {
+    &::before {
+        content: '';
+        border: 5px solid #f4511e;
+        border-radius: 50% 50%;
+        position: relative;
+        float: left;
+        top: 10px;
+        left: 78px;
+        z-index: 99;
+        margin: -5px;
+    }
 }
 </style>
