@@ -8,6 +8,7 @@ import Home from '@/components/Home';
 import Chat from '@/components/Chat';
 import Profile from '@/components/Profile';
 import MyProfile from '@/components/MyProfile';
+import Settings from '@/components/Settings';
 
 Vue.use(Router);
 
@@ -54,6 +55,11 @@ export default new Router({
       path: '/myprofile',
       name: 'myProfile',
       component: MyProfile,
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings,
     },
   ],
 });
