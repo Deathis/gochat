@@ -7,6 +7,7 @@ import Me from '@/components/Me';
 import Home from '@/components/Home';
 import Chat from '@/components/Chat';
 import Profile from '@/components/Profile';
+import MyProfile from '@/components/MyProfile';
 
 Vue.use(Router);
 
@@ -48,6 +49,11 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       component: Profile,
+    },
+    {
+      path: '/myprofile',
+      name: 'myProfile',
+      component: MyProfile,
     },
   ],
 });

@@ -1,7 +1,7 @@
 <template>
     <div id="me">
         <md-list>
-            <md-list-item>
+            <md-list-item @click.native="gotoMyProfile">
                 <md-ink-ripple />
                 <md-avatar class="md-large">
                     <img :src="currentUser.avatar" alt="Avatar">
@@ -50,6 +50,11 @@ export default {
   computed: mapState({
     currentUser: 'currentUser',
   }),
+  methods: {
+    gotoMyProfile() {
+      this.$router.push({ name: 'myProfile' });
+    },
+  },
 };
 </script>
 
