@@ -18,13 +18,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'chatList',
   methods: {
     showChatting(contact) {
       this.updateCurrentContact(contact);
+      this.updateChatRecord(contact);
       this.$router.push({ name: 'chatting' });
     },
 
@@ -41,6 +42,9 @@ export default {
                                            record.from === account || record.to === account)
                                     .sort((a, b) => b.Timestamp - a.Timestamp)[0];
     },
+    ...mapActions([
+      'updateChatRecord',
+    ]),
   },
   computed: mapState({
     chatList: 'chatList',

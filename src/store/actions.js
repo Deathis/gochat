@@ -16,4 +16,7 @@ export default{
   updateCurrentProfile({ commit }, profile) {
     commit(types.UPDATE_CURRENT_PROFILE, profile);
   },
+  updateChatRecord({ commit }, contact) {
+    commit(types.UPDATE_CHAT_RECORD, contact);
+  },
 };

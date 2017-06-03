@@ -19,4 +19,12 @@ export default {
       state.chatList.unshift(chat);
     }
   },
+  [types.UPDATE_CHAT_RECORD](state, contact) {
+    state.chatRecords.filter(record =>
+                             record.from === contact.account &&
+                             !record.read)
+                     .forEach((record) => {
+                       record.read = true;
+                     });
+  },
 };
