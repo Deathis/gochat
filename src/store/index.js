@@ -35,6 +35,7 @@ export default new Vuex.Store({
     chatList: [
     ],
     currentProfile: { account: 2, name: 'Randy', gender: 0, avatar: 'https://placeimg.com/40/40/people/2' },
+    currentTheme: 'default',
   },
   mutations,
   actions,

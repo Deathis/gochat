@@ -13,6 +13,20 @@ Vue.config.productionTip = false;
 Vue.use(VueMaterial);
 Vue.use(Bubble);
 
+Vue.material.registerTheme({
+  green: {
+    primary: 'green',
+    accent: 'yellow',
+  },
+  teal: {
+    primary: 'blue',
+    accent: 'pink',
+  },
+  purple: {
+    primary: 'purple',
+    accent: 'orange',
+  },
+});
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

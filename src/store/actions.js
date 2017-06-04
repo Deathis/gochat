@@ -19,4 +19,10 @@ export default{
   updateChatRecord({ commit }, contact) {
     commit(types.UPDATE_CHAT_RECORD, contact);
   },
+  updateCurrentTheme({ commit }, theme) {
+    commit(types.UPDATE_CURRENT_THEME, theme);
+    (async () => {
+      localStorage.setItem('currentTheme', theme.name);
+    })();
+  },
 };
