@@ -9,11 +9,17 @@ import Chat from '@/components/Chat';
 import Profile from '@/components/Profile';
 import MyProfile from '@/components/MyProfile';
 import Settings from '@/components/Settings';
+import Login from '@/components/Login';
 
 Vue.use(Router);
 
 export default new Router({
   routes: [
+    {
+      path: '/',
+      name: 'root',
+      component: Login,
+    },
     {
       path: '/home',
       name: 'home',
@@ -60,6 +66,11 @@ export default new Router({
       path: '/settings',
       name: 'settings',
       component: Settings,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
     },
   ],
 });
