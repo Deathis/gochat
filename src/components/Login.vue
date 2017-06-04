@@ -1,7 +1,7 @@
 <template>
     <md-layout id="login" md-column>
         <span class="md-display-2">GOCHAT</span>
-        <form v-show="status!=='init'" novalidate @submit.stop.prevent="submit">
+        <form v-show="status!=='init'"  @submit.stop.prevent="submit">
             <md-input-container>
                 <label>UserName</label>
                 <md-input v-model.trim.lazy="form.username" required></md-input>
@@ -14,7 +14,7 @@
     
             <md-input-container v-if="status==='signup'">
                 <label>Email</label>
-                <md-input v-model.trim.lazy="form.email" :required="status==='signup'"></md-input>
+                <md-input v-model.trim.lazy="form.email" type="email" :required="status==='signup'"></md-input>
             </md-input-container>
             <md-button type="submit" class="md-primary md-raised">{{submitBtnText}}</md-button>
         </form>
