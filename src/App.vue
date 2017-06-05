@@ -19,7 +19,7 @@ export default {
     const theme = localStorage.getItem('currentTheme');
     if (!theme) {
       this.updateCurrentTheme({ name: 'default' });
-      this.$material.setCurrentTheme(theme);
+      this.$material.setCurrentTheme('default');
     } else {
       this.updateCurrentTheme({ name: theme });
       this.$material.setCurrentTheme(theme);
