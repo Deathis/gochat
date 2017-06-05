@@ -82,6 +82,7 @@ export default {
 <style lang="scss" scoped>
 #login {
     height: 100%;
+    flex-wrap: nowrap;
     justify-content: center; 
     span {
         align-self: center;
