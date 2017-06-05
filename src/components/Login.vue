@@ -9,7 +9,7 @@
     
             <md-input-container md-has-password>
                 <label>Password</label>
-                <md-input v-model.trim.lazy="form.password" type="password" required></md-input>
+                <md-input v-model.lazy="form.password" type="password" required></md-input>
             </md-input-container>
     
             <md-input-container v-if="status==='signup'">
@@ -73,7 +73,7 @@ export default {
       }
     },
     submit() {
-      console.log('submited');
+      console.log(this.form.password);
     },
   },
 };
