@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "compass-mixins": "^0.12.10",
+    "leancloud-realtime": "^3.4.1",
+    "leancloud-storage": "^2.5.0",
     "vue": "^2.2.6",
     "vue-material": "^0.7.1",
     "vue-router": "^2.3.1",

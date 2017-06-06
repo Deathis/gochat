@@ -1,29 +1,31 @@
 <template>
-    <md-layout id="login" md-column>
-        <span class="md-display-2">GOCHAT</span>
-        <form v-show="status!=='init'"  @submit.stop.prevent="submit">
-            <md-input-container>
-                <label>UserName</label>
-                <md-input v-model.trim.lazy="form.username" required></md-input>
-            </md-input-container>
-    
-            <md-input-container md-has-password>
-                <label>Password</label>
-                <md-input v-model.lazy="form.password" type="password" required></md-input>
-            </md-input-container>
-    
-            <md-input-container v-if="status==='signup'">
-                <label>Email</label>
-                <md-input v-model.trim.lazy="form.email" type="email" :required="status==='signup'"></md-input>
-            </md-input-container>
-            <md-button type="submit" class="md-primary md-raised">{{submitBtnText}}</md-button>
-        </form>
-        <md-button v-show="status==='init'" class="md-primary md-raised" @click.native="primaryClick">begin</md-button>
-        <md-button class="md-raised" @click.native="secondaryClick">{{secondaryBtnText}}</md-button>
-    </md-layout>
+  <md-layout id="login" md-column>
+    <span class="md-display-2">GOCHAT</span>
+    <form v-show="status!=='init'" @submit.stop.prevent="submit">
+      <md-input-container>
+        <label>UserName</label>
+        <md-input v-model.trim.lazy="form.username" required></md-input>
+      </md-input-container>
+  
+      <md-input-container md-has-password>
+        <label>Password</label>
+        <md-input v-model.lazy="form.password" type="password" required></md-input>
+      </md-input-container>
+  
+      <md-input-container v-if="status==='signup'">
+        <label>Email</label>
+        <md-input v-model.trim.lazy="form.email" type="email" :required="status==='signup'"></md-input>
+      </md-input-container>
+      <md-button type="submit" class="md-primary md-raised" :disabled="status==='pending'">{{submitBtnText}}</md-button>
+    </form>
+    <md-button v-show="status==='init'" class="md-primary md-raised" @click.native="primaryClick" :disabled="status==='pending'">start</md-button>
+    <md-button class="md-raised" @click.native="secondaryClick" :disabled="status==='pending'">{{secondaryBtnText}}</md-button>
+  </md-layout>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'login',
   data() {
@@ -38,7 +40,7 @@ export default {
   },
   computed: {
     submitBtnText() {
-      let text = 'begin';
+      let text = '';
       if (this.status === 'signup') {
         text = 'signup';
       }
@@ -60,6 +62,10 @@ export default {
     },
   },
   methods: {
+    ...mapActions([
+      'login',
+      'signup',
+    ]),
     primaryClick() {
       if (this.status === 'init') {
         this.status = 'signup';
@@ -73,7 +79,27 @@ export default {
       }
     },
     submit() {
-      console.log(this.form.password);
+      if (this.status === 'signup') {
+        const signupInfo = {
+          username: this.form.username,
+          password: this.form.password,
+          email: this.form.email };
+        this.signup(signupInfo)
+        .then(() => {
+          this.status = 'init';
+          this.$router.push({ name: 'chat' });
+        }, (() => {
+          this.status = 'signup';
+        }));
+      } else if (this.status === 'login') {
+        this.login({ username: this.form.username, password: this.form.password }).then(() => {
+          this.status = 'init';
+          this.$router.push({ name: 'chat' });
+        }, () => {
+          this.status = 'login';
+        });
+      }
+      this.status = 'pending';
     },
   },
 };
@@ -81,36 +107,37 @@ export default {
 
 <style lang="scss" scoped>
 #login {
-    height: 100%;
-    flex-wrap: nowrap;
-    justify-content: center; 
-    span {
-        align-self: center;
-        &.md-display-2 {
-            margin: {
-                bottom: 20px;
-            }
-        }
+  height: 100%;
+  flex-wrap: nowrap;
+  justify-content: center;
+  span {
+    align-self: center;
+    &.md-display-2 {
+      margin: {
+        bottom: 20px;
+      }
     }
+  }
 
-    $formWidth:80%;
-    form {
-        min-width: $formWidth;
-        align-self: center;
-        .md-button {
-            margin: {
-                left: 0;
-                right: 0;
-            };
-            min-width: 100%;
-            align-self: center;
-            text-transform: capitalize;
-        }
-    }
+  $formWidth:80%;
+  form {
+    min-width: $formWidth;
+    align-self: center;
     .md-button {
-        min-width: $formWidth;
-        align-self: center;
-        text-transform: capitalize;
+      margin: {
+        left: 0;
+        right: 0;
+      }
+      ;
+      min-width: 100%;
+      align-self: center;
+      text-transform: capitalize;
     }
+  }
+  .md-button {
+    min-width: $formWidth;
+    align-self: center;
+    text-transform: capitalize;
+  }
 }
 </style>

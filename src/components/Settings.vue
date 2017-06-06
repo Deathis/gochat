@@ -19,11 +19,11 @@
                 </md-list-item>
             </md-list>
             <md-list>
-                <md-list-item>
+                <md-list-item @click.native="logOut">
                     <md-ink-ripple />
                     <div class="md-list-text-container">
                         <div class="md-title">
-                            Exit
+                            LogOut
                         </div>
                     </div>
                     <md-divider></md-divider>
@@ -37,15 +37,23 @@
 
 <script>
 import Theme from '@/components/Theme';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'settings',
   methods: {
+    ...mapActions([
+      'logout',
+    ]),
     goback() {
       this.$router.go(-1);
     },
     openDialog() {
       this.$refs.themeDialog.$children[0].open();
+    },
+    logOut() {
+      this.logout();
+      this.$router.push({ name: 'login' });
     },
   },
   components: {

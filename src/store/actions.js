@@ -1,3 +1,4 @@
+import * as api from '@/api';
 import * as types from './types';
 
 export default{
@@ -24,5 +25,31 @@ export default{
     (async () => {
       localStorage.setItem('currentTheme', theme.name);
     })();
+  },
+  updateCurrentUser({ commit }, user) {
+    commit(types.UPDATE_CURRENT_USER, user);
+  },
+  async login({ commit }, { username, password }) {
+    const loginedUser = await api.login(username, password);
+    const user = {
+      account: loginedUser.get('username'),
+      name: 'test',
+      gender: 0,
+    };
+    commit(types.UPDATE_CURRENT_USER, user);
+    return loginedUser;
+  },
+  async signup({ commit }, { username, password, email }) {
+    const loginedUser = await api.signup(username, password, email);
+    const user = {
+      account: loginedUser.get('username'),
+      name: 'test',
+      gender: 0,
+    };
+    commit(types.UPDATE_CURRENT_USER, user);
+    return loginedUser;
+  },
+  logout() {
+    api.logout();
   },
 };

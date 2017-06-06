@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    currentUser: { account: 1, name: 'Julia', gender: 1, avatar: 'https://placeimg.com/40/40/people/1' },
+    currentUser: { account: '', name: '', gender: 0, avatar: 'https://placeimg.com/40/40/people/1' },
     currentContact: { account: 2, name: 'Randy', gender: 0, avatar: 'https://placeimg.com/40/40/people/2' },
     chatRecords: [
       {

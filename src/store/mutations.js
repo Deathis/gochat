@@ -30,4 +30,9 @@ export default {
   [types.UPDATE_CURRENT_THEME](state, theme) {
     state.currentTheme = theme.name;
   },
+  [types.UPDATE_CURRENT_USER](state, user) {
+    state.currentUser.account = user.account;
+    state.currentUser.name = user.name;
+    state.currentUser.gender = user.gender;
+  },
 };

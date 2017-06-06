@@ -9,6 +9,7 @@
 <script>
 import Home from '@/components/Home';
 import { mapActions } from 'vuex';
+import { User } from 'leancloud-storage';
 
 export default {
   name: 'app',
@@ -24,9 +25,20 @@ export default {
       this.updateCurrentTheme({ name: theme });
       this.$material.setCurrentTheme(theme);
     }
+
+    const currentUser = User.current();
+    if (currentUser) {
+      const user = {
+        account: currentUser.get('username'),
+        name: 'test',
+        gender: 0,
+      };
+      this.updateCurrentUser(user);
+    }
   },
   methods: mapActions([
     'updateCurrentTheme',
+    'updateCurrentUser',
   ]),
 };
 </script>

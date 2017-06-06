@@ -10,10 +10,11 @@ import Profile from '@/components/Profile';
 import MyProfile from '@/components/MyProfile';
 import Settings from '@/components/Settings';
 import Login from '@/components/Login';
+import { User } from 'leancloud-storage';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -24,6 +25,7 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: Home,
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'chat',
@@ -51,21 +53,25 @@ export default new Router({
       path: '/chatting',
       name: 'chatting',
       component: Chat,
+      meta: { requiresAuth: true },
     },
     {
       path: '/profile',
       name: 'profile',
       component: Profile,
+      meta: { requiresAuth: true },
     },
     {
       path: '/myprofile',
       name: 'myProfile',
       component: MyProfile,
+      meta: { requiresAuth: true },
     },
     {
       path: '/settings',
       name: 'settings',
       component: Settings,
+      meta: { requiresAuth: true },
     },
     {
       path: '/login',
@@ -74,3 +80,31 @@ export default new Router({
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.length === 0) {
+    next({ name: 'chat' });
+  }
+
+  if (to.name === 'root' || to.name === 'login') {
+    const currentUser = User.current();
+    if (currentUser) {
+      next({ name: 'chat' });
+    } else {
+      next();
+    }
+  }
+
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const currentUser = User.current();
+    if (!currentUser) {
+      next({ name: 'root' });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;
