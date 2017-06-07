@@ -26,3 +26,11 @@ export async function updateAvatar(avatarFile) {
 
   return currentUser.save();
 }
+
+export async function updateNickname({ nickname }) {
+  const currentUser = AV.User.current();
+  currentUser.set('nickname', nickname);
+  currentUser.fetchWhenSave = true;
+
+  return currentUser.save();
+}

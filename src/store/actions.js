@@ -63,4 +63,12 @@ export default{
     commit(types.UPDATE_CURRENT_USER, user);
     return avUser.get('avatar');
   },
+  async updateNickname({ commit }, { name }) {
+    const avUser = await api.updateNickname({ nickname: name });
+    const user = {
+      name: avUser.get('nickname'),
+    };
+    commit(types.UPDATE_CURRENT_USER, user);
+    return avUser.get('nickname');
+  },
 };

@@ -7,7 +7,7 @@
             <h2 class="md-title">My Profile</h2>
         </md-toolbar>
         <md-list>
-            <md-list-item>
+            <md-list-item @click.native="selectAvatar">
                 <md-ink-ripple />
                 <div class="md-list-text-container">
                     <div class="md-title">
@@ -19,7 +19,7 @@
                 </md-avatar>
                 <md-divider></md-divider>
             </md-list-item>
-            <md-list-item>
+            <md-list-item @click.native="openDialog('editName')">
                 <md-ink-ripple />
                 <div class="md-list-text-container">
                     <div class="md-title">
@@ -62,20 +62,61 @@
                 <md-divider></md-divider>
             </md-list-item>
         </md-list>
+        <input ref="fileInput" v-show="false" @change="selectFile" type="file" accept="image/*" />
+        <md-dialog-prompt v-model.lazy.trim()="name" md-title="Edit Name" md-input-maxlength="24" md-ok-text="Done" md-cancel-text="Cancel" @close="onClose" ref="editName">
+        </md-dialog-prompt>
+    
     </md-layout>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'myProfile',
+  data() {
+    return {
+      avatarFile: null,
+      name: null,
+    };
+  },
   computed: mapState([
     'currentUser',
   ]),
+  created() {
+    this.name = this.currentUser.name;
+  },
   methods: {
+    ...mapActions([
+      'updateAvatar',
+      'updateNickname',
+    ]),
     goback() {
       this.$router.go(-1);
+    },
+    selectFile(e) {
+      this.avatarFile = e.target.files[0];
+    },
+    selectAvatar() {
+      this.$refs.fileInput.click();
+    },
+    async uploadAvatar(avatarFile) {
+      this.updateAvatar(avatarFile);
+    },
+    openDialog(ref) {
+      this.$refs[ref].open();
+    },
+    onClose(e) {
+      if (e === 'ok' && this.name && this.name.length > 0) {
+        this.updateNickname({ name: this.name });
+      }
+    },
+  },
+  watch: {
+    avatarFile: function update(val) {
+      if (val) {
+        this.uploadAvatar(val);
+      }
     },
   },
 };
