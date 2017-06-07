@@ -10,7 +10,7 @@
       <img :src="currentUser.avatar?currentUser.avatar:'https://placeimg.com/40/40/people/1'" @click="selectAvatar" alt="Avatar">
     </div>
     <div class="buttoncontainer">
-      <md-button class="md-raised md-primary" :disabled="uploadStatus === 'uploading'">next</md-button>
+      <md-button class="md-raised md-primary" :disabled="uploadStatus === 'uploading'" @click.native="finish">finish</md-button>
     </div>
     <input ref="fileInput" v-show="false" @change="selectFile" type="file" accept="image/*" />
   </div>
@@ -48,6 +48,9 @@ export default {
       } catch (e) {
         this.uploadStatus = 'failed';
       }
+    },
+    finish() {
+      this.$router.push({ name: 'chat' });
     },
   },
   watch: {
@@ -87,6 +90,9 @@ export default {
   .buttoncontainer {
     flex-basis: 20%;
     text-align: center;
+    .md-button {
+      text-transform: capitalize;
+    }
   }
 }
 </style>
