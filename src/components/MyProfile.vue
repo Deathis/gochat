@@ -51,7 +51,7 @@
                 <md-ink-ripple />
                 <div class="md-list-text-container">
                     <div class="md-title">
-                        ID
+                        Account
                     </div>
                 </div>
                 <div class="md-list-text-container">
