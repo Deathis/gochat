@@ -34,3 +34,11 @@ export async function updateNickname({ nickname }) {
 
   return currentUser.save();
 }
+
+export async function updateGender({ gender }) {
+  const currentUser = AV.User.current();
+  currentUser.set('gender', gender);
+  currentUser.fetchWhenSave = true;
+
+  return currentUser.save();
+}

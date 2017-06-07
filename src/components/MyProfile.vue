@@ -33,7 +33,7 @@
                 </div>
                 <md-divider></md-divider>
             </md-list-item>
-            <md-list-item>
+            <md-list-item @click.native="openDialog('editGender')">
                 <md-ink-ripple />
                 <div class="md-list-text-container">
                     <div class="md-title">
@@ -65,7 +65,17 @@
         <input ref="fileInput" v-show="false" @change="selectFile" type="file" accept="image/*" />
         <md-dialog-prompt v-model.lazy="name" md-title="Edit Name" md-input-maxlength="24" md-ok-text="Done" md-cancel-text="Cancel" @close="editNameOnClose" ref="editName">
         </md-dialog-prompt>
-    
+        <md-dialog ref="editGender">
+            <md-dialog-title>Edit Gender</md-dialog-title>
+            <div class="gender-group">
+                <md-radio v-model="gender" id="my-test1" name="gender" md-value="0">Male</md-radio>
+                <md-radio v-model="gender" id="my-test2" name="gender" md-value="1">Female</md-radio>
+            </div>
+            <md-dialog-actions>
+                <md-button class="md-primary" @click.native="closeEditGenderDialog('cancel')">Cancel</md-button>
+                <md-button class="md-primary" @click.native="closeEditGenderDialog('ok')">Ok</md-button>
+            </md-dialog-actions>
+        </md-dialog>
     </md-layout>
 </template>
 
@@ -78,6 +88,7 @@ export default {
     return {
       avatarFile: null,
       name: null,
+      gender: 0,
     };
   },
   computed: mapState([
@@ -85,11 +96,13 @@ export default {
   ]),
   created() {
     this.name = this.currentUser.name;
+    this.gender = this.currentUser.gender;
   },
   methods: {
     ...mapActions([
       'updateAvatar',
       'updateNickname',
+      'updateGender',
     ]),
     goback() {
       this.$router.go(-1);
@@ -106,10 +119,16 @@ export default {
     openDialog(ref) {
       this.$refs[ref].open();
     },
-    editNameOnClose(e) {
-      if (e === 'ok' && this.name && this.name.length > 0) {
+    editNameOnClose(type) {
+      if (type === 'ok' && this.name && this.name.length > 0) {
         this.updateNickname({ name: this.name });
       }
+    },
+    closeEditGenderDialog(type) {
+      if (type === 'ok') {
+        this.updateGender({ gender: +this.gender });
+      }
+      this.$refs.editGender.close();
     },
   },
   watch: {
@@ -126,5 +145,10 @@ export default {
 .value {
     text-align: right;
     color: #9e9e9e;
+}
+.gender-group{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
 }
 </style>

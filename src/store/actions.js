@@ -71,4 +71,12 @@ export default{
     commit(types.UPDATE_CURRENT_USER, user);
     return avUser.get('nickname');
   },
+  async updateGender({ commit }, { gender }) {
+    const avUser = await api.updateGender({ gender });
+    const user = {
+      gender: avUser.get('gender'),
+    };
+    commit(types.UPDATE_CURRENT_USER, user);
+    return avUser.get('gender');
+  },
 };
