@@ -10,6 +10,7 @@ import Profile from '@/components/Profile';
 import MyProfile from '@/components/MyProfile';
 import Settings from '@/components/Settings';
 import Login from '@/components/Login';
+import UserAvatar from '@/components/UserAvatar';
 import { User } from 'leancloud-storage';
 
 Vue.use(Router);
@@ -77,6 +78,12 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: Login,
+    },
+    {
+      path: '/user-avatar',
+      name: 'userAvatar',
+      component: UserAvatar,
+      meta: { requiresAuth: true },
     },
   ],
 });

@@ -15,3 +15,14 @@ export async function login(username, password) {
 export function logout() {
   AV.User.logOut();
 }
+
+export async function updateAvatar(avatarFile) {
+  const tmp = avatarFile.name.split('.');
+  const name = `avatar.${tmp[tmp.length - 1]}`;
+  const avFile = new AV.File(name, avatarFile);
+  const currentUser = AV.User.current();
+  currentUser.set('avatar', avFile);
+  currentUser.fetchWhenSave = true;
+
+  return currentUser.save();
+}

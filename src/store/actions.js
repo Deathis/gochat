@@ -33,8 +33,9 @@ export default{
     const loginedUser = await api.login(username, password);
     const user = {
       account: loginedUser.get('username'),
-      name: 'test',
-      gender: 0,
+      name: loginedUser.get('nickname'),
+      gender: loginedUser.get('gender'),
+      avatar: loginedUser.get('avatar').thumbnailURL(72, 72),
     };
     commit(types.UPDATE_CURRENT_USER, user);
     return loginedUser;
@@ -43,13 +44,23 @@ export default{
     const loginedUser = await api.signup(username, password, email);
     const user = {
       account: loginedUser.get('username'),
-      name: 'test',
-      gender: 0,
+      name: loginedUser.get('nickname'),
+      gender: loginedUser.get('gender'),
+      avatar: loginedUser.get('avatar').thumbnailURL(72, 72),
     };
     commit(types.UPDATE_CURRENT_USER, user);
     return loginedUser;
   },
   logout() {
     api.logout();
+  },
+  async updateAvatar({ commit }, avatarFile) {
+    const avUser = await api.updateAvatar(avatarFile);
+    const avatarThumbnailURL = avUser.get('avatar').thumbnailURL(72, 72);
+    const user = {
+      avatar: avatarThumbnailURL,
+    };
+    commit(types.UPDATE_CURRENT_USER, user);
+    return avUser.get('avatar');
   },
 };
