@@ -7,7 +7,7 @@
     <md-progress v-show="uploadStatus === 'uploading'" md-indeterminate></md-progress>
     <div class="avatar">
       <span class="md-subheading">Set your avatar</span>
-      <img :src="currentUser.avatar?currentUser.avatar:'https://placeimg.com/40/40/people/1'" @click="selectAvatar" alt="People">
+      <img :src="currentUser.avatar?currentUser.avatar:'https://placeimg.com/40/40/people/1'" @click="selectAvatar" alt="Avatar">
     </div>
     <div class="buttoncontainer">
       <md-button class="md-raised md-primary" :disabled="uploadStatus === 'uploading'">next</md-button>
