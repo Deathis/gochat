@@ -33,7 +33,7 @@ export default{
     const loginedUser = await api.login(username, password);
     const user = {
       account: loginedUser.get('username'),
-      name: loginedUser.get('nickname'),
+      name: loginedUser.get('nickname') || `user${loginedUser.id.substr(0, 5)}`,
       gender: loginedUser.get('gender'),
       avatar: loginedUser.get('avatar').thumbnailURL(72, 72),
     };
@@ -44,8 +44,8 @@ export default{
     const loginedUser = await api.signup(username, password, email);
     const user = {
       account: loginedUser.get('username'),
-      name: loginedUser.get('nickname'),
-      gender: loginedUser.get('gender'),
+      name: loginedUser.get('nickname') || `user${loginedUser.id.substr(0, 5)}`,
+      gender: loginedUser.get('gender') || 0,
       avatar: loginedUser.get('avatar') ? loginedUser.get('avatar').thumbnailURL(72, 72) : undefined,
     };
     commit(types.UPDATE_CURRENT_USER, user);
