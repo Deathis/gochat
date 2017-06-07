@@ -80,7 +80,7 @@ const router = new Router({
       component: Login,
     },
     {
-      path: '/user-avatar',
+      path: '/useravatar',
       name: 'userAvatar',
       component: UserAvatar,
       meta: { requiresAuth: true },

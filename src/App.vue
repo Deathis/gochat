@@ -32,7 +32,7 @@ export default {
         account: currentUser.get('username'),
         name: currentUser.get('nickname'),
         gender: currentUser.get('gender'),
-        avatar: currentUser.get('avatar').thumbnailURL(72, 72),
+        avatar: currentUser.get('avatar') ? currentUser.get('avatar').thumbnailURL(72, 72) : undefined,
       };
       this.updateCurrentUser(user);
     }

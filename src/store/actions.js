@@ -46,7 +46,7 @@ export default{
       account: loginedUser.get('username'),
       name: loginedUser.get('nickname'),
       gender: loginedUser.get('gender'),
-      avatar: loginedUser.get('avatar').thumbnailURL(72, 72),
+      avatar: loginedUser.get('avatar') ? loginedUser.get('avatar').thumbnailURL(72, 72) : undefined,
     };
     commit(types.UPDATE_CURRENT_USER, user);
     return loginedUser;

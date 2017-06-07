@@ -87,7 +87,7 @@ export default {
         this.signup(signupInfo)
         .then(() => {
           this.status = 'init';
-          this.$router.push({ name: 'chat' });
+          this.$router.push({ name: 'userAvatar' });
         }, (() => {
           this.status = 'signup';
         }));
