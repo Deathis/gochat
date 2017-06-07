@@ -26,8 +26,7 @@ export default {
       this.$material.setCurrentTheme(theme);
     }
 
-    const currentUser = User.current();
-    if (currentUser) {
+    User.current().fetch().then((currentUser) => {
       const user = {
         account: currentUser.get('username'),
         name: currentUser.get('nickname') || `user${currentUser.id.substr(0, 5)}`,
@@ -35,7 +34,7 @@ export default {
         avatar: currentUser.get('avatar') ? currentUser.get('avatar').thumbnailURL(72, 72) : undefined,
       };
       this.updateCurrentUser(user);
-    }
+    });
   },
   methods: mapActions([
     'updateCurrentTheme',
