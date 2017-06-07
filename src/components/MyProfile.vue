@@ -63,7 +63,7 @@
             </md-list-item>
         </md-list>
         <input ref="fileInput" v-show="false" @change="selectFile" type="file" accept="image/*" />
-        <md-dialog-prompt v-model.lazy.trim()="name" md-title="Edit Name" md-input-maxlength="24" md-ok-text="Done" md-cancel-text="Cancel" @close="editNameOnClose" ref="editName">
+        <md-dialog-prompt v-model.lazy="name" md-title="Edit Name" md-input-maxlength="24" md-ok-text="Done" md-cancel-text="Cancel" @close="editNameOnClose" ref="editName">
         </md-dialog-prompt>
     
     </md-layout>
