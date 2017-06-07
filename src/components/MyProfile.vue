@@ -68,8 +68,8 @@
         <md-dialog ref="editGender">
             <md-dialog-title>Edit Gender</md-dialog-title>
             <div class="gender-group">
-                <md-radio v-model="gender" id="my-test1" name="gender" md-value="0">Male</md-radio>
-                <md-radio v-model="gender" id="my-test2" name="gender" md-value="1">Female</md-radio>
+                <md-radio class="md-primary" v-model="gender" id="my-test1" name="gender" md-value="0">Male</md-radio>
+                <md-radio class="md-primary" v-model="gender" id="my-test2" name="gender" md-value="1">Female</md-radio>
             </div>
             <md-dialog-actions>
                 <md-button class="md-primary" @click.native="closeEditGenderDialog('cancel')">Cancel</md-button>
