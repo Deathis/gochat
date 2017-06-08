@@ -11,6 +11,7 @@ import MyProfile from '@/components/MyProfile';
 import Settings from '@/components/Settings';
 import Login from '@/components/Login';
 import UserAvatar from '@/components/UserAvatar';
+import AddContacts from '@/components/AddContacts';
 import { User } from 'leancloud-storage';
 
 Vue.use(Router);
@@ -25,7 +26,7 @@ const router = new Router({
     {
       path: '/home',
       name: 'home',
-      component: Home,
+      components: { keepAlive: Home },
       meta: { requiresAuth: true },
       children: [
         {
@@ -53,13 +54,13 @@ const router = new Router({
     {
       path: '/chatting',
       name: 'chatting',
-      component: Chat,
+      components: { keepAlive: Chat },
       meta: { requiresAuth: true },
     },
     {
       path: '/profile',
       name: 'profile',
-      component: Profile,
+      components: { keepAlive: Profile },
       meta: { requiresAuth: true },
     },
     {
@@ -83,6 +84,12 @@ const router = new Router({
       path: '/user-avatar',
       name: 'userAvatar',
       component: UserAvatar,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/add-contacts',
+      name: 'addContacts',
+      component: AddContacts,
       meta: { requiresAuth: true },
     },
   ],

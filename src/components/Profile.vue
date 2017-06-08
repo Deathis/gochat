@@ -5,10 +5,7 @@
                 <md-button class="md-icon-button" @click.native="goback">
                     <md-icon>arrow_back</md-icon>
                 </md-button>
-                <h2 class="md-title">Profile</h2>
-                <md-button class="md-icon-button">
-                    <md-icon>person</md-icon>
-                </md-button>
+                <h2 class="md-title">Profile</h2> 
             </md-toolbar>
             <md-list>
                 <md-list-item>
@@ -31,7 +28,8 @@
                 </md-list-item>
             </md-list>  
             <md-list class="buttonContainer">
-                <md-button @click.native="gotoChatting" class="md-raised md-primary">Message</md-button>
+                <md-button v-if="isContact" @click.native="gotoChatting" class="md-raised md-primary">Messages</md-button>
+                <md-button v-else @click.native="addContact(currentProfile.avUser)" class="md-raised md-primary">Add</md-button>
             </md-list> 
         </md-layout>
     </div>
@@ -54,11 +52,22 @@ export default {
     ...mapActions([
       'updateCurrentContact',
       'updateChatRecord',
+      'addContact',
     ]),
   },
-  computed: mapState([
-    'currentProfile',
-  ]),
+  computed: {
+    ...mapState([
+      'currentProfile',
+      'contactList',
+    ]),
+    isContact() {
+      let cb = function cb(contact) {
+        return contact.account === this.currentProfile.account;
+      };
+      cb = cb.bind(this);
+      return this.contactList.findIndex(cb) >= 0;
+    },
+  },
 };
 </script>
 

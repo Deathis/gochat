@@ -1,7 +1,7 @@
 import * as api from '@/api';
 import * as types from './types';
 
-export default{
+export default {
   updateCurrentContact({ commit }, contact) {
     commit(types.UPDATE_CURRENT_CONTACT, contact);
   },
@@ -38,6 +38,17 @@ export default{
       avatar: loginedUser.get('avatar').thumbnailURL(72, 72),
     };
     commit(types.UPDATE_CURRENT_USER, user);
+
+    const avContacts = await api.getContacts();
+    const contactList = avContacts.map(avContact => ({
+      avUser: avContact,
+      account: avContact.get('username'),
+      name: avContact.get('nickname'),
+      gender: avContact.get('gender'),
+      avatar: avContact.get('avatar') ? avContact.get('avatar').thumbnailURL(72, 72) : undefined,
+    }));
+    commit(types.UPDATE_CONTACT_LIST, contactList);
+
     return loginedUser;
   },
   async signup({ commit }, { username, password, email }) {
@@ -81,5 +92,20 @@ export default{
     };
     commit(types.UPDATE_CURRENT_USER, user);
     return avUser.get('gender');
+  },
+  async searchContact({ commit }, { account }) {
+    return api.searchUser({ account });
+  },
+
+  async addContact({ commit }, avUser) {
+    const avContacts = await api.addContact(avUser);
+    const contactList = avContacts.map(avContact => ({
+      avUser: avContact,
+      account: avContact.get('username'),
+      name: avContact.get('nickname'),
+      gender: avContact.get('gender'),
+      avatar: avContact.get('avatar') ? avContact.get('avatar').thumbnailURL(72, 72) : undefined,
+    }));
+    commit(types.UPDATE_CONTACT_LIST, contactList);
   },
 };

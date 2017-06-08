@@ -42,3 +42,29 @@ export async function updateGender({ gender }) {
 
   return currentUser.save();
 }
+
+export async function searchUser({ account }) {
+  if (account === AV.User.current().get('username')) {
+    return null;
+  }
+  const query = new AV.Query('_User');
+  query.equalTo('username', account);
+  return query.first();
+}
+
+
+export async function addContact(avUser) {
+  const currentUser = AV.User.current();
+  const contactsRelation = currentUser.relation('contacts');
+  contactsRelation.add(avUser);
+  await currentUser.save();
+  const contacts = await contactsRelation.query().find();
+  return contacts;
+}
+
+export async function getContacts() {
+  const currentUser = AV.User.current();
+  const contactsRelation = currentUser.relation('contacts');
+  const contacts = await contactsRelation.query().find();
+  return contacts;
+}

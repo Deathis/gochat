@@ -27,14 +27,10 @@ export default new Vuex.Store({
         read: false,
       },
     ],
-    contactList: [
-      { account: 2, name: 'Randy', gender: 0, avatar: 'https://placeimg.com/40/40/people/2' },
-      { account: 3, name: 'Solin', gender: 1, avatar: 'https://placeimg.com/40/40/people/3' },
-      { account: 4, name: 'Jack', gender: 0, avatar: 'https://placeimg.com/40/40/people/4' },
-    ],
+    contactList: [],
     chatList: [
     ],
-    currentProfile: { account: 2, name: 'Randy', gender: 0, avatar: 'https://placeimg.com/40/40/people/2' },
+    currentProfile: null,
     currentTheme: 'default',
   },
   mutations,

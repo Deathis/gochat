@@ -36,4 +36,8 @@ export default {
     if ('gender' in user)state.currentUser.gender = user.gender;
     if ('avatar' in user)state.currentUser.avatar = user.avatar;
   },
+
+  [types.UPDATE_CONTACT_LIST](state, contacts) {
+    state.contactList = contacts;
+  },
 };
