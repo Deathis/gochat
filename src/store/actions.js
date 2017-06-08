@@ -41,10 +41,13 @@ export default{
     return loginedUser;
   },
   async signup({ commit }, { username, password, email }) {
-    const loginedUser = await api.signup(username, password, email);
+    let loginedUser = await api.signup(username, password, email);
+    loginedUser.set('nickname', `user${loginedUser.id.substr(0, 8)}`);
+    loginedUser.set('gender', 0);
+    loginedUser = await loginedUser.save();
     const user = {
       account: loginedUser.get('username'),
-      name: loginedUser.get('nickname') || `user${loginedUser.id.substr(0, 5)}`,
+      name: loginedUser.get('nickname'),
       gender: loginedUser.get('gender') || 0,
       avatar: loginedUser.get('avatar') ? loginedUser.get('avatar').thumbnailURL(72, 72) : undefined,
     };

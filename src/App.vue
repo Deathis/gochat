@@ -29,7 +29,7 @@ export default {
     User.current().fetch().then((currentUser) => {
       const user = {
         account: currentUser.get('username'),
-        name: currentUser.get('nickname') || `user${currentUser.id.substr(0, 5)}`,
+        name: currentUser.get('nickname'),
         gender: currentUser.get('gender') || 0,
         avatar: currentUser.get('avatar') ? currentUser.get('avatar').thumbnailURL(72, 72) : undefined,
       };
