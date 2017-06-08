@@ -81,7 +81,7 @@ export default {
     submit() {
       if (this.status === 'signup') {
         const signupInfo = {
-          username: this.form.username,
+          username: this.form.username.toLowerCase(),
           password: this.form.password,
           email: this.form.email };
         this.signup(signupInfo)
@@ -92,12 +92,13 @@ export default {
           this.status = 'signup';
         }));
       } else if (this.status === 'login') {
-        this.login({ username: this.form.username, password: this.form.password }).then(() => {
-          this.status = 'init';
-          this.$router.push({ name: 'chat' });
-        }, () => {
-          this.status = 'login';
-        });
+        this.login({ username: this.form.username.toLowerCase(),
+          password: this.form.password }).then(() => {
+            this.status = 'init';
+            this.$router.push({ name: 'chat' });
+          }, () => {
+            this.status = 'login';
+          });
       }
       this.status = 'pending';
     },
