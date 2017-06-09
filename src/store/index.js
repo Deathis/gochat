@@ -7,29 +7,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    currentUser: { account: '', name: '', gender: 0, avatar: 'https://placeimg.com/40/40/people/1' },
-    currentContact: { account: 2, name: 'Randy', gender: 0, avatar: 'https://placeimg.com/40/40/people/2' },
-    chatRecords: [
-      {
-        id: 0,
-        from: 1,
-        to: 2,
-        content: 'Hello Randy!',
-        Timestamp: 1235656765745,
-        read: true,
-      },
-      {
-        id: 1,
-        from: 2,
-        to: 1,
-        content: 'Hi Julia!',
-        Timestamp: 1235656765746,
-        read: false,
-      },
-    ],
+    currentUser: null,
+    currentContact: null,
+    chatRecords: [],
     contactList: [],
-    chatList: [
-    ],
+    chatList: [],
     currentProfile: null,
     currentTheme: 'default',
   },

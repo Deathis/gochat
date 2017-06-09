@@ -1,5 +1,5 @@
 <template>
-    <md-layout id="chatting" md-column>
+    <md-layout v-if="currentContact" id="chatting" md-column>
         <md-toolbar>
             <md-button class="md-icon-button" @click.native="goback">
                 <md-icon>arrow_back</md-icon>
@@ -40,6 +40,11 @@ export default {
     return {
       inputContent: '',
     };
+  },
+  created() {
+    if (!this.currentContact) {
+      this.$router.push({ name: 'chat' });
+    }
   },
   methods: {
     goback() {
