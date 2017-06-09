@@ -36,6 +36,9 @@ export default {
   ]),
   watch: {
     $route: function hendler(val) {
+      if (val.name === 'me') {
+        User.current().fetch();
+      }
       this.updateCurrentUser(User.current());
       if (val.name === 'contact') {
         this.updateContactList();
