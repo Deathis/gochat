@@ -19,22 +19,17 @@ export default {
       state.chatList.unshift(chat);
     }
   },
-  [types.UPDATE_CHAT_RECORD](state, contact) {
-    state.chatRecords.filter(record =>
-                             record.from === contact.account &&
-                             !record.read)
-                     .forEach((record) => {
-                       record.read = true;
-                     });
+  [types.UPDATE_CHAT_RECORD](state, records) {
+    records.forEach((record) => {
+      if (state.chatRecords.findIndex(item => item.id === record.id) < 0) {
+        state.chatRecords.push(record);
+      }
+    });
   },
   [types.UPDATE_CURRENT_THEME](state, theme) {
     state.currentTheme = theme.name;
   },
   [types.UPDATE_CURRENT_USER](state, user) {
-    // if ('account' in user) state.currentUser.account = user.account;
-    // if ('name' in user)state.currentUser.name = user.name;
-    // if ('gender' in user)state.currentUser.gender = user.gender;
-    // if ('avatar' in user)state.currentUser.avatar = user.avatar;
     state.currentUser = user;
   },
 

@@ -26,12 +26,8 @@ export default {
   methods: {
     showChatting(contact) {
       this.updateCurrentContact(contact);
-      this.updateChatRecord(contact);
+      this.updateChatRecord();
       this.$router.push({ name: 'chatting' });
-    },
-
-    updateCurrentContact(contact) {
-      this.$store.dispatch('updateCurrentContact', contact);
     },
     getNewMsgCount(account) {
       return this.$store.state.chatRecords.filter(record =>
@@ -45,11 +41,14 @@ export default {
     },
     ...mapActions([
       'updateChatRecord',
+      'updateCurrentContact',
     ]),
   },
-  computed: mapState({
-    chatList: 'chatList',
-  }),
+  computed: mapState([
+    'chatList',
+    'currentUser',
+    'currentContact',
+  ]),
 };
 </script>
 

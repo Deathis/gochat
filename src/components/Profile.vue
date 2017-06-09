@@ -51,7 +51,7 @@ export default {
     },
     gotoChatting() {
       this.updateCurrentContact(this.currentProfile);
-      this.updateChatRecord(this.currentProfile);
+      this.updateChatRecord();
       this.$router.push({ name: 'chatting' });
     },
     ...mapActions([

@@ -1,4 +1,26 @@
 import AV from 'leancloud-storage';
+import { Realtime, TextMessage } from 'leancloud-realtime';
+
+const appId = 'nPCOlCqA9Idmb1bXjP7E8wm7-gzGzoHsz';
+const appKey = 'uWdXwqDfLAViVHB1oXaxRjnK';
+AV.init({ appId, appKey });
+
+const realtime = new Realtime({
+  appId: 'nPCOlCqA9Idmb1bXjP7E8wm7-gzGzoHsz',
+  region: 'cn',
+});
+
+const clientSingleton = (function createIMClient() {
+  let instance;
+  return {
+    getInstance: async () => {
+      if (!instance) {
+        instance = await realtime.createIMClient(AV.User.current().get(['username']));
+      }
+      return instance;
+    },
+  };
+}());
 
 export async function signup(username, password, email) {
   const user = new AV.User();
@@ -69,4 +91,28 @@ export async function getContacts() {
     contacts = await contactsRelation.query().find();
   }
   return contacts;
+}
+
+// 发送文本消息
+export async function sendTextMessage({ to, msg }) {
+  const client = await clientSingleton.getInstance();
+  const conversation = await client.createConversation({
+    members: [to],
+    name: `${AV.User.current().get('username')} & ${to}`,
+    transient: false,
+    unique: true,
+  });
+  return conversation.send(new TextMessage(msg));
+}
+
+// 获取聊天记录
+export async function getChatRecords({ to, count = 20 }) {
+  const client = await clientSingleton.getInstance();
+  const conversation = await client.createConversation({
+    members: [to],
+    name: `${AV.User.current().get('username')} & ${to}`,
+    transient: false,
+    unique: true,
+  });
+  return conversation.queryMessages({ limit: count });
 }

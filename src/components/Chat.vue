@@ -24,7 +24,7 @@
             <md-button class="md-icon-button">
                 <md-icon class="md-primary">insert_emoticon</md-icon>
             </md-button>
-            <md-button class="md-icon-button" :disabled="inputContent.length===0" @click.native="sendChatMessage">
+            <md-button class="md-icon-button" :disabled="inputContent.length===0" @click.native="sendMessage">
                 <md-icon :class="{'md-primary':inputContent.length>0}">send</md-icon>
             </md-button>
         </div>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'chat',
@@ -47,30 +47,27 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'sendChatMessage',
+    ]),
     goback() {
       this.$router.push({ name: 'chat' });
     },
-    sendChatMessage() {
-      const record = {
-        id: this.recordIndex,
-        from: this.currentUser.account,
-        to: this.currentContact.account,
-        content: this.inputContent,
-        Timestamp: new Date().getTime(),
-        read: true,
-      };
-      this.$store.dispatch('sendChatMessage', record);
+    async sendMessage() {
+      await this.sendChatMessage({ to: this.currentContact.account, content: this.inputContent });
       this.inputContent = '';
       this.$nextTick(() => {
         this.$refs.chatBox.scrollTop = this.$refs.chatBox.scrollHeight;
       });
     },
   },
-  computed: mapState({
-    currentContact: 'currentContact',
-    currentUser: 'currentUser',
+  computed: { ...mapState([
+    'currentContact',
+    'currentUser',
+    'chatRecords',
+  ]),
     currentChatRecords() {
-      const records = this.$store.state.chatRecords.filter(record =>
+      const records = this.chatRecords.filter(record =>
       (record.from === this.currentContact.account &&
       record.to === this.currentUser.account) ||
           (record.to === this.currentContact.account &&
@@ -79,9 +76,9 @@ export default {
       return records;
     },
     recordIndex() {
-      return this.$store.state.chatRecords.length + 1;
+      return this.chatRecords.length + 1;
     },
-  }),
+  },
 };
 </script>
 
