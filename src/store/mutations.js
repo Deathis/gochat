@@ -31,10 +31,11 @@ export default {
     state.currentTheme = theme.name;
   },
   [types.UPDATE_CURRENT_USER](state, user) {
-    if ('account' in user) state.currentUser.account = user.account;
-    if ('name' in user)state.currentUser.name = user.name;
-    if ('gender' in user)state.currentUser.gender = user.gender;
-    if ('avatar' in user)state.currentUser.avatar = user.avatar;
+    // if ('account' in user) state.currentUser.account = user.account;
+    // if ('name' in user)state.currentUser.name = user.name;
+    // if ('gender' in user)state.currentUser.gender = user.gender;
+    // if ('avatar' in user)state.currentUser.avatar = user.avatar;
+    state.currentUser = user;
   },
 
   [types.UPDATE_CONTACT_LIST](state, contacts) {

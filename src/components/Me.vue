@@ -1,5 +1,5 @@
 <template>
-    <div id="me">
+    <div id="me" v-if="currentUser">
         <md-list>
             <md-list-item @click.native="gotoMyProfile">
                 <md-ink-ripple />

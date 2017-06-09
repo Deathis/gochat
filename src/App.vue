@@ -26,21 +26,22 @@ export default {
       this.updateCurrentTheme({ name: theme });
       this.$material.setCurrentTheme(theme);
     }
-
-    User.current().fetch().then((currentUser) => {
-      const user = {
-        account: currentUser.get('username'),
-        name: currentUser.get('nickname'),
-        gender: currentUser.get('gender') || 0,
-        avatar: currentUser.get('avatar') ? currentUser.get('avatar').thumbnailURL(72, 72) : undefined,
-      };
-      this.updateCurrentUser(user);
-    });
+    this.updateCurrentUser(User.current());
+    this.updateContactList();
   },
   methods: mapActions([
     'updateCurrentTheme',
     'updateCurrentUser',
+    'updateContactList',
   ]),
+  watch: {
+    $route: function hendler(val) {
+      this.updateCurrentUser(User.current());
+      if (val.name === 'contact') {
+        this.updateContactList();
+      }
+    },
+  },
 };
 </script>
 

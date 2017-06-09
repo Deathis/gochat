@@ -52,7 +52,6 @@ export async function searchUser({ account }) {
   return query.first();
 }
 
-
 export async function addContact(avUser) {
   const currentUser = AV.User.current();
   const contactsRelation = currentUser.relation('contacts');
@@ -63,8 +62,11 @@ export async function addContact(avUser) {
 }
 
 export async function getContacts() {
+  let contacts = [];
   const currentUser = AV.User.current();
-  const contactsRelation = currentUser.relation('contacts');
-  const contacts = await contactsRelation.query().find();
+  if (currentUser) {
+    const contactsRelation = currentUser.relation('contacts');
+    contacts = await contactsRelation.query().find();
+  }
   return contacts;
 }
