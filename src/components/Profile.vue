@@ -1,5 +1,5 @@
 <template>
-    <div id="profile">
+    <div id="profile" v-if="currentProfile">
         <md-layout id="chatting" md-column>
             <md-toolbar>
                 <md-button class="md-icon-button" @click.native="goback">
@@ -40,6 +40,11 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'profile',
+  created() {
+    if (!this.currentProfile) {
+      this.$router.push({ name: 'contact' });
+    }
+  },
   methods: {
     goback() {
       this.$router.go(-1);
