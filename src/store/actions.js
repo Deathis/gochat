@@ -18,7 +18,7 @@ export default {
       from: msg.from,
       to: context.state.currentContact.account,
       content: msg.text,
-      Timestamp: msg.timestamp,
+      timestamp: msg.timestamp,
       read: true,
     };
 
