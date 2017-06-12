@@ -46,6 +46,9 @@ export default {
       this.$router.push({ name: 'chat' });
     }
   },
+  updated() {
+    this.$refs.chatBox.scrollTop = this.$refs.chatBox.scrollHeight;
+  },
   methods: {
     ...mapActions([
       'sendChatMessage',
@@ -56,9 +59,9 @@ export default {
     async sendMessage() {
       await this.sendChatMessage({ to: this.currentContact.account, content: this.inputContent });
       this.inputContent = '';
-      this.$nextTick(() => {
-        this.$refs.chatBox.scrollTop = this.$refs.chatBox.scrollHeight;
-      });
+    //   this.$nextTick(() => {
+    //     this.$refs.chatBox.scrollTop = this.$refs.chatBox.scrollHeight;
+    //   });
     },
   },
   computed: { ...mapState([
