@@ -28,7 +28,6 @@ export default {
     }
     this.updateCurrentUser(User.current());
     this.updateContactList();
-    this.getConversations({ account: User.current().get('username') });
   },
   methods: mapActions([
     'updateCurrentTheme',
@@ -44,6 +43,9 @@ export default {
       this.updateCurrentUser(User.current());
       if (val.name === 'contact') {
         this.updateContactList();
+      }
+      if (val.name === 'chat') {
+        this.getConversations({ account: User.current().get('username') });
       }
     },
   },
