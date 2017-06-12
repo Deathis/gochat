@@ -10,14 +10,8 @@ export default {
   [types.UPDATE_CURRENT_PROFILE](state, profile) {
     state.currentProfile = profile;
   },
-  [types.UPDATE_CHAT_LIST](state, chat) {
-    const index = state.chatList.indexOf(chat);
-    if (index < 0) {
-      state.chatList.unshift(chat);
-    } else {
-      state.chatList.splice(index, 1);
-      state.chatList.unshift(chat);
-    }
+  [types.UPDATE_CHAT_LIST](state, chatList) {
+    state.chatList = chatList;
   },
   [types.UPDATE_CHAT_RECORD](state, records) {
     records.forEach((record) => {

@@ -23,9 +23,9 @@ export default {
     };
 
     context.commit(types.ADD_CHAT_RECORD, record);
-    if (context.state.chatList.indexOf(context.state.currentContact) !== 0) {
-      context.commit(types.UPDATE_CHAT_LIST, context.state.currentContact);
-    }
+    // if (context.state.chatList.indexOf(context.state.currentContact) !== 0) {
+    //   context.commit(types.UPDATE_CHAT_LIST, context.state.currentContact);
+    // }
     return msg;
   },
   // 更新当前查看的profile
@@ -118,10 +118,36 @@ export default {
       from: msg.from === from ? from : to,
       to: msg.from === from ? to : from,
       content: msg.text,
-      Timestamp: msg.timestamp,
+      timestamp: msg.timestamp,
       read: true,
     }));
 
     return records;
+  },
+
+// 获取会话列表
+  async getConversations({ dispatch, commit }, { account }) {
+    const conversations = await api.getConversations();
+    const avUserPromise = [];
+    for (let index = 0; index < conversations.length; index += 1) {
+      const conversation = conversations[index];
+      const acc = conversation.members.find(val => val !== account);
+      avUserPromise.push(dispatch('searchContact', { account: acc }));
+    }
+    const avUsers = await Promise.all(avUserPromise);
+    const chatList = avUsers.map((avUser) => {
+      const conversation = conversations.find(val => val.members.indexOf(avUser.get('username')) >= 0);
+      return {
+        avUser,
+        conversation,
+        account: avUser.get('username'),
+        name: avUser.get('nickname'),
+        gender: avUser.get('gender'),
+        avatar: avUser.get('avatar') ? avUser.get('avatar').thumbnailURL(72, 72) : undefined,
+      };
+    });
+    chatList.sort((a, b) => b.conversation.updatedAt - a.conversation.updatedAt);
+
+    commit(types.UPDATE_CHAT_LIST, chatList);
   },
 };

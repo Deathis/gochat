@@ -75,7 +75,7 @@ export default {
       record.to === this.currentUser.account) ||
           (record.to === this.currentContact.account &&
         record.from === this.currentUser.account));
-      records.sort((a, b) => a.Timestamp - b.Timestamp);
+      records.sort((a, b) => a.timestamp - b.timestamp);
       return records;
     },
     recordIndex() {

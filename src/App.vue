@@ -28,11 +28,13 @@ export default {
     }
     this.updateCurrentUser(User.current());
     this.updateContactList();
+    this.getConversations({ account: User.current().get('username') });
   },
   methods: mapActions([
     'updateCurrentTheme',
     'updateCurrentUser',
     'updateContactList',
+    'getConversations',
   ]),
   watch: {
     $route: function hendler(val) {

@@ -1,6 +1,6 @@
 <template>
     <md-list class="md-double-line">
-        <md-list-item :class="{'small-dots':getNewMsgCount(chat.account) > 0}" v-for="chat in chatList" :key="chat.account" @click.native="showChatting(chat)">
+        <md-list-item :class="{'small-dots':chat.conversation.unreadMessagesCount}" v-for="chat in chatList" :key="chat.account" @click.native="showChatting(chat)">
             <md-ink-ripple />
             <md-avatar class="md-large">
                 <img :src="chat.avatar" alt="Avatar">
@@ -8,10 +8,12 @@
             <div class="md-list-text-container">
                 <div class="title">
                     <span class="md-title">{{chat.name}}</span>
-                    <span>{{new Date(getLastChatRecord(chat.account).Timestamp).toLocaleString()}}</span>
+                    <span>{{chat.conversation.lastMessageAt.toLocaleString()}}</span>
                 </div>
                 <span>
-                    <template v-if="getNewMsgCount(chat.account) > 0">[{{getNewMsgCount(chat.account)}} message(s)]</template> {{getLastChatRecord(chat.account).content}}</span>
+                    <template v-if="chat.conversation.unreadMessagesCount">[{{chat.conversation.unreadMessagesCount}} message(s)]</template> 
+                    {{chat.conversation.lastMessage}}
+                </span>
             </div>
             <md-divider></md-divider>
         </md-list-item>
@@ -29,19 +31,15 @@ export default {
       this.updateChatRecord();
       this.$router.push({ name: 'chatting' });
     },
-    getNewMsgCount(account) {
-      return this.$store.state.chatRecords.filter(record =>
-                record.from === account &&
-                !record.read).length;
-    },
-    getLastChatRecord(account) {
-      return this.$store.state.chatRecords.filter(record =>
-                record.from === account || record.to === account)
-                .sort((a, b) => b.Timestamp - a.Timestamp)[0];
-    },
+    // getNewMsgCount(account) {
+    //   return this.$store.state.chatRecords.filter(record =>
+    //             record.from === account &&
+    //             !record.read).length;
+    // },
     ...mapActions([
       'updateChatRecord',
       'updateCurrentContact',
+      'getChatRecords',
     ]),
   },
   computed: mapState([
@@ -55,7 +53,7 @@ export default {
 <style lang="scss" scoped>
 .title {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
 }
 
 .md-list-item {

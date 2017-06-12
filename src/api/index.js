@@ -116,3 +116,8 @@ export async function getChatRecords({ to, count = 20 }) {
   });
   return conversation.queryMessages({ limit: count });
 }
+// 获取会话列表
+export async function getConversations() {
+  const client = await clientSingleton.getInstance();
+  return client.getQuery().containsMembers([AV.User.current().get('username')]).find();
+}
