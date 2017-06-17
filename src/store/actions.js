@@ -132,7 +132,9 @@ export default {
     for (let index = 0; index < conversations.length; index += 1) {
       const conversation = conversations[index];
       const acc = conversation.members.find(val => val !== account);
-      avUserPromise.push(dispatch('searchContact', { account: acc }));
+      if (acc) {
+        avUserPromise.push(dispatch('searchContact', { account: acc }));
+      }
     }
     const avUsers = await Promise.all(avUserPromise);
     const chatList = avUsers.map((avUser) => {
