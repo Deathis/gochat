@@ -29,6 +29,7 @@ export default {
     showChatting(contact) {
       this.updateCurrentContact(contact);
       this.updateChatRecord();
+      this.markRead(this.currentContact);
       this.$router.push({ name: 'chatting' });
     },
     // getNewMsgCount(account) {
@@ -40,6 +41,7 @@ export default {
       'updateChatRecord',
       'updateCurrentContact',
       'getChatRecords',
+      'markRead',
     ]),
   },
   computed: mapState([

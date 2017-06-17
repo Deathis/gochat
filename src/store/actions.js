@@ -157,4 +157,8 @@ export default {
 
     commit(types.UPDATE_CHAT_LIST, chatList);
   },
+  // 标记消息为已读
+  markRead({ _ }, contact) {
+    contact.conversation.read();
+  },
 };
