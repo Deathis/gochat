@@ -126,7 +126,7 @@ export default {
   },
 
 // 获取会话列表
-  async getConversations({ dispatch, commit }, { account }) {
+  async updateConversations({ dispatch, commit }, { account }) {
     const conversations = await api.getConversations();
     const avUserPromise = [];
     for (let index = 0; index < conversations.length; index += 1) {

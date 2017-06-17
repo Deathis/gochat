@@ -33,7 +33,7 @@ export default {
     'updateCurrentTheme',
     'updateCurrentUser',
     'updateContactList',
-    'getConversations',
+    'updateConversations',
   ]),
   watch: {
     $route: function hendler(val) {
@@ -45,7 +45,7 @@ export default {
         this.updateContactList();
       }
       if (val.name === 'chat') {
-        this.getConversations({ account: User.current().get('username') });
+        this.updateConversations({ account: User.current().get('username') });
       }
     },
   },
