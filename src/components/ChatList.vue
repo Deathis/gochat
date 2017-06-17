@@ -8,7 +8,7 @@
             <div class="md-list-text-container">
                 <div class="title">
                     <span class="md-title">{{chat.name}}</span>
-                    <span>{{chat.conversation.lastMessageAt.toLocaleString()}}</span>
+                    <span>{{chat.conversation.lastMessageAt?chat.conversation.lastMessageAt.toLocaleString():''}}</span>
                 </div>
                 <span>
                     <template v-if="chat.conversation.unreadMessagesCount">[{{chat.conversation.unreadMessagesCount}} message(s)]</template> 

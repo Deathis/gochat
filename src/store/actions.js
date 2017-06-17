@@ -148,7 +148,12 @@ export default {
         avatar: avUser.get('avatar') ? avUser.get('avatar').thumbnailURL(72, 72) : undefined,
       };
     });
-    chatList.sort((a, b) => b.conversation.updatedAt - a.conversation.updatedAt);
+    chatList.sort((a, b) => {
+      if (!b.conversation.lastMessageAt || !a.conversation.lastMessageAt) {
+        return 0;
+      }
+      return b.conversation.lastMessageAt - a.conversation.lastMessageAt;
+    });
 
     commit(types.UPDATE_CHAT_LIST, chatList);
   },
