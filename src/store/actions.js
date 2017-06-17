@@ -64,7 +64,10 @@ export default {
   },
   // 注册
   async signup({ commit }, { username, password, email }) {
-    const loginedUser = await api.signup(username, password, email);
+    let loginedUser = await api.signup(username, password, email);
+    loginedUser.set('nickname', `user${loginedUser.id.substr(0, 8)}`);
+    loginedUser.set('gender', 0);
+    loginedUser = await loginedUser.save();
     return loginedUser;
   },
   // 登出
