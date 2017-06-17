@@ -28,12 +28,14 @@ export default {
     }
     this.updateCurrentUser(User.current());
     this.updateContactList();
+    this.listenToMessage();
   },
   methods: mapActions([
     'updateCurrentTheme',
     'updateCurrentUser',
     'updateContactList',
     'updateConversations',
+    'listenToMessage',
   ]),
   watch: {
     $route: function hendler(val) {

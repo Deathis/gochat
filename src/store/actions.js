@@ -7,7 +7,7 @@ export default {
     commit(types.UPDATE_CURRENT_CONTACT, contact);
   },
 
-  addRecord({ commit }, record) {
+  async addRecord({ commit }, record) {
     commit(types.ADD_CHAT_RECORD, record);
   },
   // 发送聊天信息
@@ -160,5 +160,38 @@ export default {
   // 标记消息为已读
   markRead({ _ }, contact) {
     contact.conversation.read();
+  },
+// 监听消息
+  async listenToMessage(context) {
+    const client = await api.getIMClient();
+    client.on('message', async (message, conversation) => {
+      const record = {
+        id: message.id,
+        from: message.from,
+        to: context.state.currentUser.account,
+        content: message.text,
+        timestamp: message.timestamp,
+        read: true,
+      };
+
+      context.dispatch('addRecord', record);
+
+      if (context.state.chatList.findIndex(val => val.conversation.id === conversation.id) < 0) {
+        const avUser = await context.dispatch('searchContact', { account: message.from });
+        const chatItem = {
+          avUser,
+          conversation,
+          account: avUser.get('username'),
+          name: avUser.get('nickname'),
+          gender: avUser.get('gender'),
+          avatar: avUser.get('avatar') ? avUser.get('avatar').thumbnailURL(72, 72) : undefined,
+        };
+        context.dispatch('addChatConversation', chatItem);
+      }
+    });
+  },
+// 添加会话到chat list
+  async addChatConversation({ commit }, chatItem) {
+    commit(types.ADD_CHAT_CONVERSATION, chatItem);
   },
 };

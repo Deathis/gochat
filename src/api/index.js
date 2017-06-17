@@ -12,8 +12,13 @@ const realtime = new Realtime({
 
 const clientSingleton = (function createIMClient() {
   let instance;
+  let user;
   return {
     getInstance: async () => {
+      if (user !== AV.User.current()) {
+        instance = null;
+        user = AV.User.current();
+      }
       if (!instance) {
         instance = await realtime.createIMClient(AV.User.current().get(['username']));
       }
@@ -121,3 +126,9 @@ export async function getConversations() {
   const client = await clientSingleton.getInstance();
   return client.getQuery().containsMembers([AV.User.current().get('username')]).find();
 }
+
+// 获取当前用户的IM客户端实例
+export async function getIMClient() {
+  return clientSingleton.getInstance();
+}
+

@@ -30,4 +30,8 @@ export default {
   [types.UPDATE_CONTACT_LIST](state, contacts) {
     state.contactList = contacts;
   },
+
+  [types.ADD_CHAT_CONVERSATION](state, chatItem) {
+    state.chatList.unshift(chatItem);
+  },
 };
