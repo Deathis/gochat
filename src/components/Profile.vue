@@ -47,6 +47,7 @@ export default {
   },
   methods: {
     goback() {
+      this.updateCurrentProfile(null);
       this.$router.go(-1);
     },
     gotoChatting() {
@@ -58,6 +59,7 @@ export default {
       'updateCurrentContact',
       'updateChatRecord',
       'addContact',
+      'updateCurrentProfile',
     ]),
   },
   computed: {
