@@ -5,7 +5,9 @@ export default {
     state.currentContact = contact;
   },
   [types.ADD_CHAT_RECORD](state, record) {
-    state.chatRecords.push(record);
+    if (state.chatRecords.findIndex(val => val.id === record.id) < 0) {
+      state.chatRecords.push(record);
+    }
   },
   [types.UPDATE_CURRENT_PROFILE](state, profile) {
     state.currentProfile = profile;
