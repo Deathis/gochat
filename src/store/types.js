@@ -16,3 +16,5 @@ export const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 export const UPDATE_CONTACT_LIST = 'UPDATE_CONTACT_LIST';
 // 添加聊天会话到列表
 export const ADD_CHAT_CONVERSATION = 'ADD_CHAT_CONVERSATION';
+// 用户登出处理
+export const USER_LOGOUT = 'USER_LOGOUT';

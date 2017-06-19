@@ -71,8 +71,9 @@ export default {
     return loginedUser;
   },
   // 登出
-  logout() {
+  logout({ commit }) {
     api.logout();
+    commit(types.USER_LOGOUT);
   },
   // 更新头像
   async updateAvatar({ dispatch }, avatarFile) {

@@ -36,4 +36,13 @@ export default {
   [types.ADD_CHAT_CONVERSATION](state, chatItem) {
     state.chatList.unshift(chatItem);
   },
+
+  [types.USER_LOGOUT](state) {
+    state.currentUser = null;
+    state.currentContact = null;
+    state.chatRecords = [];
+    state.contactList = [];
+    state.chatList = [];
+    state.currentProfile = null;
+  },
 };
