@@ -192,6 +192,10 @@ export default {
         };
         context.dispatch('addChatConversation', chatItem);
       }
+
+      if (context.state.currentContact && context.state.currentContact.account === message.from) {
+        conversation.read();
+      }
     });
   },
 // 添加会话到chat list
