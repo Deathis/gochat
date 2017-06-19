@@ -26,9 +26,11 @@ export default {
       this.updateCurrentTheme({ name: theme });
       this.$material.setCurrentTheme(theme);
     }
-    this.updateCurrentUser(User.current());
-    this.updateContactList();
-    this.listenToMessage();
+    if (User.current()) {
+      this.updateCurrentUser(User.current());
+      this.updateContactList();
+      this.listenToMessage();
+    }
   },
   methods: mapActions([
     'updateCurrentTheme',
