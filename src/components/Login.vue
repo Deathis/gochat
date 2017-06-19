@@ -65,6 +65,7 @@ export default {
     ...mapActions([
       'login',
       'signup',
+      'listenToMessage',
     ]),
     primaryClick() {
       if (this.status === 'init') {
@@ -87,6 +88,7 @@ export default {
         this.signup(signupInfo)
         .then(() => {
           this.status = 'init';
+          this.listenToMessage();
           this.$router.push({ name: 'userAvatar' });
         }, (() => {
           this.status = 'signup';
@@ -95,6 +97,7 @@ export default {
         this.login({ username: this.form.username.toLowerCase(),
           password: this.form.password }).then(() => {
             this.status = 'init';
+            this.listenToMessage();
             this.$router.push({ name: 'chat' });
           }, () => {
             this.status = 'login';
