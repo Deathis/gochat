@@ -12,7 +12,7 @@
                 </div>
                 <span>
                     <template v-if="chat.conversation.unreadMessagesCount">[{{chat.conversation.unreadMessagesCount}} message(s)]</template> 
-                    {{chat.conversation.lastMessage?chat.conversation.lastMessage._lctext:''}}
+                    {{chat.conversation.lastMessage?chat.conversation.lastMessage.text:''}}
                 </span>
             </div>
             <md-divider></md-divider>
