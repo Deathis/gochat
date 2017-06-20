@@ -1,6 +1,6 @@
 <template>
     <md-list class="md-double-line">
-        <md-list-item :class="{'small-dots':chat.conversation.unreadMessagesCount}" v-for="chat in chatList" :key="chat.account" @click.native="showChatting(chat)">
+        <md-list-item :class="{'small-dots':chat.conversation.unreadMessagesCount}" :unreadcount="chat.conversation.unreadMessagesCount" v-for="chat in chatList" :key="chat.account" @click.native="showChatting(chat)">
             <md-ink-ripple />
             <md-avatar class="md-large">
                 <img :src="chat.avatar" alt="Avatar">
@@ -11,7 +11,6 @@
                     <span>{{chat.conversation.lastMessageAt?chat.conversation.lastMessageAt.toLocaleString():''}}</span>
                 </div>
                 <span>
-                    <template v-if="chat.conversation.unreadMessagesCount">[{{chat.conversation.unreadMessagesCount}} message(s)]</template> 
                     {{chat.conversation.lastMessage?chat.conversation.lastMessage.text:''}}
                 </span>
             </div>
@@ -32,11 +31,11 @@ export default {
       this.markRead(this.currentContact);
       this.$router.push({ name: 'chatting' });
     },
-    // getNewMsgCount(account) {
-    //   return this.$store.state.chatRecords.filter(record =>
-    //             record.from === account &&
-    //             !record.read).length;
-    // },
+        // getNewMsgCount(account) {
+        //   return this.$store.state.chatRecords.filter(record =>
+        //             record.from === account &&
+        //             !record.read).length;
+        // },
     ...mapActions([
       'updateChatRecord',
       'updateCurrentContact',
@@ -55,7 +54,7 @@ export default {
 <style lang="scss" scoped>
 .title {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 .md-list-item {
@@ -66,15 +65,19 @@ export default {
 
 .small-dots {
     &::before {
-        content: '';
-        border: 5px solid #f4511e;
+        content: attr(unreadcount);
         border-radius: 50% 50%;
         position: relative;
         float: left;
-        top: 10px;
-        left: 78px;
+        top: 2px;
+        left: 89px;
         z-index: 99;
-        margin: -5px;
+        margin: -5px 0px -5px -18px;
+        width: 18px;
+        height: 18px;
+        background-color: #f4511e;
+        text-align: center;
+        font-size: xx-small;
     }
 }
 </style>
